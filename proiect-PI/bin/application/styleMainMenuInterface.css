@@ -1,0 +1,61 @@
+.button{
+    -fx-font-size: 23px;
+    -fx-pref-width:360px;
+    -fx-pref-height:28px;
+    -fx-font-family:"Georgia";
+    -fx-border-radius:4px;
+    -fx-border-color:black;
+    -fx-border-width: 1px;
+}
+.button:hover{
+	-fx-color:#dcddde;
+}
+#header{
+	-fx-font-size:30px;
+	-fx-translate-x:0px;
+	-fx-translate-y:-525px;
+	-fx-font-family: "Georgia";
+}
+.addItem{
+	-fx-translate-x:0px;
+	-fx-translate-y:-350px;
+
+}
+
+.createList{
+	-fx-translate-x:0px;
+	-fx-translate-y:-200px;
+	
+}
+.vizual{-fx-translate-x:0px;
+	-fx-translate-y:-100px;
+
+		
+}
+.modif{
+	-fx-translate-x:0px;
+	-fx-translate-y:0px;
+	
+}
+
+.vizualizerGraphic{-fx-translate-x:0px;
+	-fx-translate-y:50px;
+	
+}
+
+.modifyGraphic{
+	-fx-translate-x:0px;
+	-fx-translate-y:100px;
+	
+}
+.exportButton{
+	-fx-translate-x:0px;
+	-fx-translate-y:100px;
+	
+}
+
+.exitButton{
+	-fx-translate-x:0px;
+	-fx-translate-y:200px;
+	
+}

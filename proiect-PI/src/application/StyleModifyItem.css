@@ -1,0 +1,55 @@
+.button{
+    -fx-font-size: 20px;
+    -fx-pref-width:200px;
+    -fx-pref-height:20px;
+    -fx-font-family: "Georgia";
+    -fx-border-radius:4px;
+    -fx-border-color:black;
+    -fx-border-width: 1px;
+}
+.button:hover{
+	-fx-color:#dcddde;
+}
+#header{
+	-fx-pref-width:200px;
+	-fx-pref-height:17px;
+	-fx-font-size:25px;
+	-fx-translate-x:100px;
+	-fx-translate-y:-80px;
+	-fx-font-family:"Georgia";
+}
+#choiceBox{
+	-fx-pref-height:15px;
+	-fx-pref-width:230px;
+	-fx-font-size:17px;
+	-fx-translate-x:105px;
+	-fx-translate-y:-100px;
+	-fx-font-family: "Georgia";
+}
+#backButton{
+	-fx-pref-height:25px;
+	-fx-pref-width:180px;
+	-fx-font-size:20px;
+	-fx-translate-x:75px;
+	-fx-translate-y:160px;
+	-fx-font-family: "Georgia";	
+}
+#deleteItem{
+	-fx-pref-height:25px;
+	-fx-pref-width:180px;
+	-fx-font-size:20px;
+	-fx-translate-x:525px;
+	-fx-translate-y:240px;
+	-fx-font-family: "Georgia";	
+}
+
+#text{
+	-fx-pref-height:30px;
+	-fx-pref-width:180px;
+	-fx-font-size:29px;
+	-fx-translate-x:75px;
+	-fx-translate-y:-280px;
+	-fx-font-family: "Georgia";	
+	-fx-color:"red";
+	
+}

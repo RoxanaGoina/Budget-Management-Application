@@ -1,0 +1,79 @@
+.button{
+    -fx-font-size: 20px;
+    -fx-pref-width:250px;
+    -fx-pref-height:30px;
+    -fx-font-family: "Georgia";
+    -fx-border-radius:4px;
+    -fx-border-color:black;
+    -fx-border-width: 1px;
+}
+.button:hover{
+	-fx-color:#dcddde;
+}
+#header{
+	-fx-pref-width:200px;
+	-fx-pref-height:17px;
+	-fx-font-size:25px;
+	-fx-translate-x:50px;
+	-fx-translate-y:40px;
+	-fx-font-family:"Georgia";
+}
+#choiceBox{
+	-fx-pref-height:15px;
+	-fx-pref-width:180px;
+	-fx-font-size:17px;
+	-fx-translate-x:-575px;
+	-fx-translate-y:160px;
+	-fx-font-family: "Georgia";
+}
+
+#name{
+	 -fx-pref-width:130px;
+	 -fx-pref-height:10px;
+	-fx-font-size:21px;
+	-fx-translate-x:-345px;
+	-fx-translate-y:110px;
+	-fx-font-family: "Georgia";
+}
+#nameField{
+	-fx-translate-x:-395px;
+	-fx-translate-y:110px;
+	-fx-pref-width:200px;
+	 -fx-pref-height:20px;
+}
+#select{
+	-fx-pref-width:150px;
+	-fx-pref-height:10px;
+	-fx-font-size:21px;
+	-fx-translate-x:100px;
+	-fx-translate-y:-20px;
+	-fx-font-family: "Georgia";
+}
+addButton{
+	-fx-translate-x:300px;
+	-fx-translate-y:-300px;
+}
+#backButton{
+	-fx-pref-width:300px;
+}
+#backButton{
+	-fx-pref-width:170px;
+}
+
+#createList{
+	 
+	 -fx-pref-height:10px;
+	-fx-font-size:20px;
+	-fx-font-family: "Georgia";
+	-fx-pref-width:180px;
+	
+}
+
+#textArea{
+	 -fx-pref-height:320px;
+	-fx-font-size:20px;
+	-fx-font-family: "Georgia";
+	-fx-pref-width:320px;
+	
+	
+}
