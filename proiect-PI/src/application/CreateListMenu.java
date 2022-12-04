@@ -140,24 +140,24 @@ public class CreateListMenu {
 			if (e.getButton() == MouseButton.PRIMARY)
 				primaryStage.setScene((new MainMenuInterface()).showMainMenu(primaryStage, windowWidth, windowHeight));
 		});
+		
 		List<String> list = new ArrayList<>();
 		addButton.setOnMouseClicked(e -> {
+			List<String >list1=new ArrayList<>();
 			if (e.getButton() == MouseButton.PRIMARY) {
 				String item = choiceBox.getValue();
 				textArea.appendText(item + "\n");
+				list.add(item);
 			}
-			List<String> split = new ArrayList<>();
-			List<Item> listaIT = new ArrayList<>();
-
+				System.out.println(list);
 		});
-		
+	
+		List<String> list1=new ArrayList<>();
 		createList.setOnMouseClicked(e -> {
-			List<String> list1=new ArrayList<>();
+			List<Item> listaIT = new ArrayList<>();
 			if (e.getButton() == MouseButton.PRIMARY) {
-				String item = choiceBox.getValue();
-				list1.add(item);
-				List<Item> listaIT = new ArrayList<>();
-				for (String s : list1) {
+			String []split=textArea.getText().split("\n");
+				for (String s : split) {
 					String s1[] = s.split("\\|");
 					int id = Integer.parseInt(s1[0]);
 					String name = s1[1];
@@ -166,13 +166,13 @@ public class CreateListMenu {
 					listaIT.add(item1);
 				}
 				String title=nameField.getText();
-				System.out.println(title);
 				System.out.println(listaIT);
+				
 				DataBaseOperations.createList(listaIT,title);
 				primaryStage.close();
+				//Select * from item inner join  item_to_item_list on item.id=item_to_item_list.item_id where item_to_item_list.item_list_id=3
 			}
 		});
-
 		return a;
 	}
 
