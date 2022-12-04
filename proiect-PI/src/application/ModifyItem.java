@@ -5,6 +5,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import java.io.FileInputStream; 
+import java.io.FileNotFoundException; 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.List;
@@ -19,7 +21,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
 public class ModifyItem {
 private Button deleteItem=new Button("Stergere item");
 private Label header=new Label("Selecteaza");
@@ -45,9 +46,9 @@ public Scene create(Stage primaryStage, double windowWidth, double windowHeight)
 	choiceBox.setFocusTraversable(false);
 	text.setTextFill(Color.color(1, 0, 0));
 	
+	
 	try {
-	FileInputStream input;
-	input = new FileInputStream("./delete.png");
+	FileInputStream input = new FileInputStream("./delete.png");
 	Image image = new Image(input);
     ImageView imageView = new ImageView(image);
     imageView.setFitHeight(186); 

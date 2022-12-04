@@ -66,7 +66,35 @@ public class DataBaseOperations {
 			e.printStackTrace();
 		}
 		
+		
 	}
+public static void createList(List<Item>a,String title) {
+	Connection conn;
+	try {
+		conn = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test",dbUser,dbPass);
+		PreparedStatement pst=conn.prepareStatement("INSERT INTO ITEMLIST(TITLE) values(?)");
+		pst.setString(1, title);
+		pst.executeUpdate();
+		String querry="select ID from ITEMLIST order by 1 desc limit 1";
+		Statement st1=conn.createStatement();
+		ResultSet rs=st1.executeQuery(querry);
+		int id=0;
+		while(rs.next()) {
+			 id=rs.getInt("ID");
+		}
+		for(Item i:a) {
+			PreparedStatement st = conn.prepareStatement("INSERT INTO ITEM_TO_ITEM_LIST(ITEM_ID,ITEM_LIST_ID) values(?,?)");
+			st.setInt(1, i.getId());
+			st.setInt(2, id);
+			st.executeUpdate();
+		}
+		
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	}
+
 	public static void addItems(Item a) {
 		Connection conn;
 		try {
@@ -124,4 +152,12 @@ public class DataBaseOperations {
 				e.printStackTrace();
 			}
 	}
+	public static List<Integer> listItemID(Item item) {
+		List<Integer> list=new ArrayList<>();
+		for(Item i:DataBaseOperations.listItem())
+			list.add(i.getId());
+		return list;
+			
+		}
+	
 }

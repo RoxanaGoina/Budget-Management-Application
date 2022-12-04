@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 //import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.event.EventHandler;
@@ -28,38 +29,66 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class CreateListMenu {
-	private Label header=new Label("Creare lista");
-	private Button addButton=new Button("Adaugare item");
-	private Label name=new Label("Name");
-	private TextField nameField=new TextField();
-	private Text textName=new Text();
-	ChoiceBox<String> choiceBox=new ChoiceBox<>();
-	private TextField selectField=new TextField();
-	private Text selectText=new Text();
-	private Label select=new Label("Selecteaza");
-	private Button backButton=new Button("Inapoi");
-	private Button createList=new Button("Creare");
-	private TextArea textArea=new TextArea();
-	
+	private Label header = new Label("Creare lista");
+	private Button addButton = new Button("Adaugare item");
+	private Label name = new Label("Name");
+	private TextField nameField = new TextField();
+	private Text textName = new Text();
+	ChoiceBox<String> choiceBox = new ChoiceBox<>();
+	private TextField selectField = new TextField();
+	private Text selectText = new Text();
+	private Label select = new Label("Selecteaza");
+	private Button backButton = new Button("Inapoi");
+	private Button createList = new Button("Creare");
+	private TextArea textArea = new TextArea();
+
+	public static ItemType toItemType(String type) {
+
+		if (ItemType.Patiserie.toString().equals(type))
+			return ItemType.Patiserie;
+		if (ItemType.Fructe.toString().equals(type))
+			return ItemType.Fructe;
+		if (ItemType.Legume.toString().equals(type))
+			return ItemType.Legume;
+		if (ItemType.ProduseLactate.toString().equals(type))
+			return ItemType.ProduseLactate;
+		if (ItemType.Bauturi.toString().equals(type))
+			return ItemType.Bauturi;
+		if (ItemType.Combustibil.toString().equals(type))
+			return ItemType.Combustibil;
+		if (ItemType.Mezeluri.toString().equals(type))
+			return ItemType.Mezeluri;
+		if (ItemType.Decoratiuni.toString().equals(type))
+			return ItemType.Decoratiuni;
+		if (ItemType.Unelte.toString().equals(type))
+			return ItemType.Unelte;
+		if (ItemType.Dulciuri.toString().equals(type))
+			return ItemType.Dulciuri;
+		if (ItemType.Paste.toString().equals(type))
+			return ItemType.Paste;
+		if (ItemType.Altele.toString().equals(type))
+			return ItemType.Altele;
+		return null;
+	}
+
 	public Scene create(Stage primaryStage, double windowWidth, double windowHeight) {
 		primaryStage.setWidth(windowWidth);
 		primaryStage.setHeight(windowHeight);
-		FlowPane root=new FlowPane();
-		Scene a=new Scene(root,windowWidth,windowHeight);
+		FlowPane root = new FlowPane();
+		Scene a = new Scene(root, windowWidth, windowHeight);
 		MainMenu.noConnectionLabel.setId("noConnectionLabel");
 		DataBaseOperations.checkConnection();
 		MainMenu.noConnectionLabelSetProp();
 		a.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-		    @Override
-		    public void handle(MouseEvent mouseEvent) {
-		    	if(DataBaseOperations.checkConnection() == false) {
-					primaryStage.setScene((new MainMenu()).showMenu(primaryStage,windowWidth, windowHeight));
+			@Override
+			public void handle(MouseEvent mouseEvent) {
+				if (DataBaseOperations.checkConnection() == false) {
+					primaryStage.setScene((new MainMenu()).showMenu(primaryStage, windowWidth, windowHeight));
 					MainMenu.noConnectionLabel.setText("Nu exista conexiune spre baza de date");
 					System.out.println("ai apasat pe root");
-				}
-				else
+				} else
 					MainMenu.noConnectionLabel.setText("");
-		    }
+			}
 		});
 		textArea.setId("textArea");
 		textArea.setFocusTraversable(false);
@@ -95,41 +124,61 @@ public class CreateListMenu {
 		createList.setTranslateY(300);
 		textArea.setEditable(false);
 		textArea.setFont(Font.font(19));
-		//textArea.setWrapText(true);
+		// textArea.setWrapText(true);
 		textArea.setTranslateX(120);
 		textArea.setTranslateY(40);
-		
-		List<Item> ItemList=DataBaseOperations.listItem();
-		for(Item i: ItemList) {
-			choiceBox.getItems().add(i.getName()+" | "+i.getItemType());
+
+		List<Item> ItemList = DataBaseOperations.listItem();
+		List<Item> lista = new ArrayList<>();
+		for (Item i : ItemList) {
+			choiceBox.getItems().add(i.getId() + "|" + i.getName() + "|" + i.getItemType().toString());
 		}
 		a.getStylesheets().add(getClass().getResource("styleCreateList.css").toExternalForm());
-		root.getChildren().addAll(header,addButton,name,nameField,textName,choiceBox,select,backButton,createList,textArea);
-		backButton.setOnMouseClicked(e->{
-			if(e.getButton()==MouseButton.PRIMARY)
+		root.getChildren().addAll(header, addButton, name, nameField, textName, choiceBox, select, backButton,
+				createList, textArea);
+		backButton.setOnMouseClicked(e -> {
+			if (e.getButton() == MouseButton.PRIMARY)
 				primaryStage.setScene((new MainMenuInterface()).showMainMenu(primaryStage, windowWidth, windowHeight));
 		});
-		addButton.setOnMouseClicked(e->{
-			if(e.getButton()==MouseButton.PRIMARY)
-			{
-				String item=choiceBox.getValue();
-				textArea.appendText(item+"\n");
-				
+		List<String> list = new ArrayList<>();
+		addButton.setOnMouseClicked(e -> {
+			if (e.getButton() == MouseButton.PRIMARY) {
+				String item = choiceBox.getValue();
+				textArea.appendText(item + "\n");
 			}
-		});
-		createList.setOnMouseClicked(e->{
-			if(e.getButton()==MouseButton.PRIMARY)
-			{	String title=nameField.getText();
-				DataBaseOperations.addItemTitle(title);
-				
-				
-			}
+			List<String> split = new ArrayList<>();
+			List<Item> listaIT = new ArrayList<>();
+
 		});
 		
-		
+		createList.setOnMouseClicked(e -> {
+			List<String> list1=new ArrayList<>();
+			if (e.getButton() == MouseButton.PRIMARY) {
+				String item = choiceBox.getValue();
+				list1.add(item);
+				List<Item> listaIT = new ArrayList<>();
+				for (String s : list1) {
+					String s1[] = s.split("\\|");
+					int id = Integer.parseInt(s1[0]);
+					String name = s1[1];
+					String itemType = s1[2];
+					Item item1 = new Item(id, name, toItemType(itemType));
+					listaIT.add(item1);
+				}
+				String title=nameField.getText();
+				System.out.println(title);
+				System.out.println(listaIT);
+				DataBaseOperations.createList(listaIT,title);
+				primaryStage.close();
+			}
+		});
+
 		return a;
 	}
-	
-	
-	
+
+	private char[] ArrayToString(String[] s1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
