@@ -35,6 +35,7 @@ public class OpenApp {
 				
 				primaryStage.setWidth(windowWidth);
 				primaryStage.setHeight(windowHeight);
+				primaryStage.setResizable(false);
 				
 				primaryStage.setScene((new MainMenu()).showMenu(primaryStage,windowWidth, windowHeight));
 			//	primaryStage.setMaxHeight("windowHeight");

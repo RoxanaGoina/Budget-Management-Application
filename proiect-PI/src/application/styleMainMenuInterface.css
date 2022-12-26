@@ -13,7 +13,7 @@
 #header{
 	-fx-font-size:30px;
 	-fx-translate-x:0px;
-	-fx-translate-y:-525px;
+	-fx-translate-y:-430px;
 	-fx-font-family: "Georgia";
 }
 .addItem{
@@ -57,5 +57,9 @@
 .exitButton{
 	-fx-translate-x:0px;
 	-fx-translate-y:200px;
+	
+}
+
+#vbox{
 	
 }

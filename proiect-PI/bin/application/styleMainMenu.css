@@ -1,7 +1,7 @@
 .button{
     -fx-font-size: 23px;
     -fx-pref-width:250px;
-    -fx-pref-height:34px;
+    -fx-pref-height:60px;
     -fx-font-family: "Georgia";
     -fx-border-radius:4px;
     -fx-border-color:black;

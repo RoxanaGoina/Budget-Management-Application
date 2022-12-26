@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 public class MainMenu {
 	// GUI objects
 	private Button meniuButton=new Button("Meniu Principal");
-	private Button exitButton=new Button("Inchide aplicatia");
+	private Button exitButton=new Button("Închide aplicatia");
 	private Label header = new Label("Aplicație pentru gestionarea bugetului");
 	
 	

@@ -17,6 +17,8 @@ import java.util.List;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -30,15 +32,15 @@ import javafx.stage.Stage;
 
 public class CreateListMenu {
 	private Label header = new Label("Creare lista");
-	private Button addButton = new Button("Adaugare item");
-	private Label name = new Label("Name");
+	private Button addButton = new Button("Adăugare item");
+	private Label name = new Label("Nume");
 	private TextField nameField = new TextField();
 	private Text textName = new Text();
 	ChoiceBox<String> choiceBox = new ChoiceBox<>();
 	private TextField selectField = new TextField();
 	private Text selectText = new Text();
-	private Label select = new Label("Selecteaza");
-	private Button backButton = new Button("Inapoi");
+	private Label select = new Label("Selectează");
+	private Button backButton = new Button("Înapoi");
 	private Button createList = new Button("Creare");
 	private TextArea textArea = new TextArea();
 
@@ -50,8 +52,8 @@ public class CreateListMenu {
 			return ItemType.Fructe;
 		if (ItemType.Legume.toString().equals(type))
 			return ItemType.Legume;
-		if (ItemType.ProduseLactate.toString().equals(type))
-			return ItemType.ProduseLactate;
+		if (ItemType.Lactate.toString().equals(type))
+			return ItemType.Lactate;
 		if (ItemType.Bauturi.toString().equals(type))
 			return ItemType.Bauturi;
 		if (ItemType.Combustibil.toString().equals(type))
@@ -70,7 +72,13 @@ public class CreateListMenu {
 			return ItemType.Altele;
 		return null;
 	}
-
+	public boolean ListContainsItem(List<String> list,String a) {
+		for(String i : list)
+			if(i.equals(a))
+				return true;
+			else return false;
+		return false;
+	}
 	public Scene create(Stage primaryStage, double windowWidth, double windowHeight) {
 		primaryStage.setWidth(windowWidth);
 		primaryStage.setHeight(windowHeight);
@@ -116,17 +124,17 @@ public class CreateListMenu {
 		choiceBox.setId("choiceBox");
 		choiceBox.setFocusTraversable(false);
 		nameField.setFont(Font.font(15));
-		addButton.setTranslateY(250);
-		addButton.setTranslateX(30);
-		backButton.setTranslateX(10);
+		addButton.setTranslateY(150);
+		addButton.setTranslateX(-50);
+		backButton.setTranslateX(-350);
 		backButton.setTranslateY(300);
-		createList.setTranslateX(300);
+		createList.setTranslateX(-100);
 		createList.setTranslateY(300);
 		textArea.setEditable(false);
 		textArea.setFont(Font.font(19));
 		// textArea.setWrapText(true);
-		textArea.setTranslateX(120);
-		textArea.setTranslateY(40);
+		textArea.setTranslateX(250);
+		textArea.setTranslateY(-100);
 
 		List<Item> ItemList = DataBaseOperations.listItem();
 		List<Item> lista = new ArrayList<>();
@@ -134,45 +142,91 @@ public class CreateListMenu {
 			choiceBox.getItems().add(i.getId() + "|" + i.getName() + "|" + i.getItemType().toString());
 		}
 		a.getStylesheets().add(getClass().getResource("styleCreateList.css").toExternalForm());
+		root.setAlignment(Pos.CENTER);
 		root.getChildren().addAll(header, addButton, name, nameField, textName, choiceBox, select, backButton,
 				createList, textArea);
 		backButton.setOnMouseClicked(e -> {
 			if (e.getButton() == MouseButton.PRIMARY)
 				primaryStage.setScene((new MainMenuInterface()).showMainMenu(primaryStage, windowWidth, windowHeight));
 		});
-		
+
 		List<String> list = new ArrayList<>();
 		addButton.setOnMouseClicked(e -> {
-			List<String >list1=new ArrayList<>();
+			List<String> list1 = new ArrayList<>();
 			if (e.getButton() == MouseButton.PRIMARY) {
 				String item = choiceBox.getValue();
-				textArea.appendText(item + "\n");
-				list.add(item);
+				
+				if(ListContainsItem(list, item)==true) { 
+					Alert alert = new Alert(AlertType.WARNING);
+					alert.setTitle("Problema lista");
+					alert.setHeaderText("Obiectul adaugat exista deja");
+					alert.showAndWait();	
+				}
+				else
+					{textArea.appendText(item + "\n");
+					   list.add(item);
+					}
 			}
-				System.out.println(list);
+			System.out.println(list);
 		});
-	
-		List<String> list1=new ArrayList<>();
+
+		List<String> list1 = new ArrayList<>();
 		createList.setOnMouseClicked(e -> {
 			List<Item> listaIT = new ArrayList<>();
 			if (e.getButton() == MouseButton.PRIMARY) {
-			String []split=textArea.getText().split("\n");
-				for (String s : split) {
-					String s1[] = s.split("\\|");
-					int id = Integer.parseInt(s1[0]);
-					String name = s1[1];
-					String itemType = s1[2];
-					Item item1 = new Item(id, name, toItemType(itemType));
-					listaIT.add(item1);
-				}
-				String title=nameField.getText();
-				System.out.println(listaIT);
+				if (textArea.getText().isEmpty()) {
+					Alert alert = new Alert(AlertType.WARNING);
+					alert.setTitle("Problema lista");
+					alert.setHeaderText("Lista este goala");
+					alert.showAndWait();
 				
-				DataBaseOperations.createList(listaIT,title);
-				primaryStage.close();
-				//Select * from item inner join  item_to_item_list on item.id=item_to_item_list.item_id where item_to_item_list.item_list_id=3
+				} else {
+					String[] split = textArea.getText().split("\n");
+					for (String s : split) {
+						String s1[] = s.split("\\|");
+						int id = Integer.parseInt(s1[0]);
+						String name = s1[1];
+						String itemType = s1[2];
+						Item item1 = new Item(id, name, toItemType(itemType));
+						listaIT.add(item1);
+					}
+					String title = nameField.getText();
+					if (nameField.getText().isBlank()) {
+						Alert alert = new Alert(AlertType.WARNING);
+						alert.setTitle("Problema titlu");
+						alert.setHeaderText("Numele listei e null");
+						// alert.setContentText("Connect to the database successfully!");
+						alert.showAndWait();
+					
+					}
+					boolean isNameDiff = DataBaseOperations.isNameDifferent(title);
+					if (isNameDiff == true) {
+						DataBaseOperations.createList(listaIT, title);
+					} else {
+
+						Alert alert = new Alert(AlertType.WARNING);
+						alert.setTitle("Problema titlu");
+						alert.setHeaderText("Numele listei deja exista");
+						// alert.setContentText("Connect to the database successfully!");
+
+						alert.showAndWait();
+
+					}
+
+					// System.out.println(listaIT);
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Informare");
+					alert.setHeaderText("Lista a fost creată cu succes");
+					alert.showAndWait();
+					primaryStage.setScene((new MainMenuInterface()).showMainMenu(primaryStage, windowWidth, windowHeight));
+					// Select * from item inner join item_to_item_list on
+					// item.id=item_to_item_list.item_id where
+					// item_to_item_list.item_list_id=(select ID from ITEMLIST order by 1 desc limit
+					// 1)
+				}
 			}
 		});
+
 		return a;
 	}
 

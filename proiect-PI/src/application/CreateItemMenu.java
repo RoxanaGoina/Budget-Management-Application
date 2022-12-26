@@ -8,16 +8,20 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import java.io.FileInputStream;
 //import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.List;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -25,15 +29,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class CreateItemMenu {
-	private Label label1 = new Label("Crearea unui item nou");
+	private Label label1 = new Label("Creare item");
 	private Label label2 = new Label("ID");
 	private Button createButton = new Button("Creează");
 	private TextField field = new TextField();
 	private Text text = new Text();
 	private TextField t1 = new TextField();
 	private ChoiceBox<String> choicebox = new ChoiceBox<>();
-	private Label l4 = new Label("Type");
-	private Button backButton = new Button("Inapoi");
+	private Label l4 = new Label("Tip");
+	private Button backButton = new Button("Înapoi");
 
 	public static ItemType toItemType(String type) {
 
@@ -43,8 +47,8 @@ public class CreateItemMenu {
 			return ItemType.Fructe;
 		if (ItemType.Legume.toString().equals(type))
 			return ItemType.Legume;
-		if (ItemType.ProduseLactate.toString().equals(type))
-			return ItemType.ProduseLactate;
+		if (ItemType.Lactate.toString().equals(type))
+			return ItemType.Lactate;
 		if (ItemType.Bauturi.toString().equals(type))
 			return ItemType.Bauturi;
 		if (ItemType.Combustibil.toString().equals(type))
@@ -91,14 +95,14 @@ public class CreateItemMenu {
 		textField.setFocusTraversable(false);
 		t1.setId("t1");
 		t1.setFocusTraversable(false);
-		Label label3 = new Label("Name");
+		Label label3 = new Label("Nume");
 		label3.setId("label3");
 		textField.setId("textField");
 		// label3.setFocusTraversable(false);
 		createButton.setId("createButton");
 		createButton.setFocusTraversable(false);
-		createButton.setTranslateY(450);
-		createButton.setTranslateX(130);
+		createButton.setTranslateY(160);
+		createButton.setTranslateX(120);
 
 		// root.setAlignment(Pos.CENTER);
 		field.setTranslateX(0);
@@ -112,7 +116,7 @@ public class CreateItemMenu {
 		choicebox.setValue("Alege categoria");
 		choicebox.getItems().add(ItemType.Fructe.toString());
 		choicebox.getItems().add(ItemType.Legume.toString());
-		choicebox.getItems().add(ItemType.ProduseLactate.toString());
+		choicebox.getItems().add(ItemType.Lactate.toString());
 		choicebox.getItems().add(ItemType.Mezeluri.toString());
 		choicebox.getItems().add(ItemType.Patiserie.toString());
 		choicebox.getItems().add(ItemType.Bauturi.toString());
@@ -124,10 +128,11 @@ public class CreateItemMenu {
 		choicebox.setId("choicebox");
 		choicebox.setFocusTraversable(false);
 		a.getStylesheets().add(getClass().getResource("styleItemMenu.css").toExternalForm());
+		root.setAlignment(Pos.CENTER);
 		backButton.setId("backButton");
 		backButton.setFocusTraversable(false);
-		backButton.setTranslateY(450);
-		backButton.setTranslateX(-800);
+		backButton.setTranslateY(160);
+		backButton.setTranslateX(-700);
 		/*
 		 * try { FileInputStream input; input = new
 		 * FileInputStream("D:\\JavaStuff\\proiect-PI\\createItem.jpg"); Image image =
@@ -138,19 +143,52 @@ public class CreateItemMenu {
 		 * (FileNotFoundException e1) { System.out.println("Nu am gasit imaginea!");
 		 * e1.printStackTrace(); }
 		 */
+		try {
+			FileInputStream input = new FileInputStream("./shopping.jpg");
+			Image image = new Image(input);
+			ImageView imageView = new ImageView(image);
+			imageView.setFitHeight(222);
+			imageView.setFitWidth(250);
+			imageView.setStyle("-fx-translate-x:610px; -fx-translate-y:-170px");
+
+			root.getChildren().add(imageView);
+		} catch (FileNotFoundException e1) {
+			System.out.println("Nu am gasit imaginea!");
+			e1.printStackTrace();
+		}
+
 		root.getChildren().addAll(label1, text, textField, label3, createButton, choicebox, l4, backButton);
+
 		backButton.setOnMouseClicked(e -> {
 			if (e.getButton() == MouseButton.PRIMARY)
 				primaryStage.setScene((new MainMenuInterface()).showMainMenu(primaryStage, windowWidth, windowHeight));
+
 		});
 		createButton.setOnMouseClicked(e -> {
-			if (e.getButton() == MouseButton.PRIMARY) {
-				// int id=Integer.parseInt(t1.getText());
+			// int id=Integer.parseInt(t1.getText());
+			if (textField.getText().isBlank()) {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Problema Item");
+				alert.setHeaderText("Numele e null");
+				alert.showAndWait();
+				primaryStage.close();
+
+			}
+		if(choicebox.getSelectionModel().isEmpty())
+		 {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Problema Item");
+				alert.setHeaderText("Alege categoria");
+				alert.showAndWait();
+				primaryStage.close();
+				return;
+			} else {
 				String name = textField.getText();
 				String type = choicebox.getValue();
 				System.out.println(name + " " + type);
 				t1.clear();
 				textField.clear();
+
 				Item item = new Item(0, name, toItemType(type));
 				// List<Item> List = DataBaseOperations.listItem();
 				if (DataBaseOperations.listItem().size() >= 1) {
@@ -158,14 +196,14 @@ public class CreateItemMenu {
 						System.out.println("Produsul deja exista");
 					else {
 						DataBaseOperations.add(item);
-						System.out.println("CEVA");
+						//System.out.println("CEVA");
 						// List=DataBaseOperations.listItem();
 
 					}
 				} else
 					DataBaseOperations.add(item);
-
 			}
+
 		});
 
 		return a;

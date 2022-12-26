@@ -7,7 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DataBaseOperations {
 	private static String dbUser = "sa";
@@ -34,7 +37,27 @@ public class DataBaseOperations {
 		}
 	}
 	
-
+	public static boolean isNameDifferent(String title) {
+		try {
+			Connection conn = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test",dbUser,dbPass);
+			String querry="select  title from ITEMLIST where title='"+ title +"'";
+			Statement st=conn.createStatement();
+		//	st.setString(1, title);
+			ResultSet rs=st.executeQuery(querry);
+			if(rs.next()==false) {
+				//System.out.println("Nume ok");
+				return true;
+				
+			}
+			else {
+				System.out.println("Alege alt nume");
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 	public static void main(String args[]) {
 		openConnection();
 		checkConnection();
@@ -88,13 +111,32 @@ public static void createList(List<Item>a,String title) {
 			st.setInt(2, id);
 			st.executeUpdate();
 		}
-		
-		
 	} catch (SQLException e) {
 		e.printStackTrace();
 	}
 	}
-
+ public static void addIntoTableFinalList(FinalList finalList,String title) {
+	 Connection conn;
+		try {
+			conn = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test",dbUser,dbPass);
+			String querry="select id  from itemlist where TITLE = '"+ title +"'";
+			Statement st = conn.createStatement();
+			ResultSet rs=st.executeQuery(querry);
+			int id=1;
+			while(rs.next())
+				id=rs.getInt(id);
+			st.close();
+			conn = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test",dbUser,dbPass);
+			PreparedStatement pst=conn.prepareStatement("INSERT INTO FINAL_LIST(ID_LIST,PRICE,DATE) values(?,?,?)");
+			pst.setFloat(1, id);
+			pst.setDouble(2, finalList.getPrice());
+			java.sql.Date date = java.sql.Date.valueOf(finalList.getDate());
+			pst.setDate(3, date);
+			pst.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+ }
 	public static void addItems(Item a) {
 		Connection conn;
 		try {
@@ -160,4 +202,112 @@ public static void createList(List<Item>a,String title) {
 			
 		}
 	
+	public static Map<String,List<Item>> getAllListsForExport(){
+		//	List<ItemList> lista=new ArrayList<>();
+			HashMap<String,List<Item>> map=new HashMap<>();
+			try {
+				Connection conn = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test",dbUser,dbPass);
+				String querry="Select  item.id, item.name, item.itemtype, ITIL.ITEM_LIST_ID, list.title   from item inner join  item_to_item_list ITIL on item.id=ITIL.item_id inner join itemlist list on list.id = ITIL.ITEM_LIST_ID where ITIL.item_list_id=any (select ID from ITEMLIST)";
+				Statement pst = conn.createStatement();
+				ResultSet rs=pst.executeQuery(querry);
+				int idList=0;
+				int idItem=0;
+				String numeItem;
+				String itemType;
+				String numeList;
+				Item object=new Item();
+				while(rs.next()) {
+					 idList=rs.getInt("ITEM_LIST_ID");
+					 idItem=rs.getInt("ID");
+					 numeItem=rs.getString("NAME");
+					 itemType=rs.getString("ITEMTYPE");
+					 numeList=rs.getString("TITLE");
+					 object=new Item(idItem,numeItem,CreateItemMenu.toItemType(itemType));
+					 if(map.containsKey(numeList)) {
+						 List<Item> list=map.get(numeList);
+						 list.add(object);
+						 map.put(numeList,list);
+					 }
+					 else {
+							List<Item> lista=new ArrayList<>();
+							lista.add(object);
+							map.put(numeList,lista);	
+					 }
+						
+				}
+				/*for(Item i:a) {
+					PreparedStatement st = conn.prepareStatement("INSERT INTO ITEM_TO_ITEM_LIST(ITEM_ID,ITEM_LIST_ID) values(?,?)");
+					st.setInt(1, i.getId());
+					st.setInt(2, id);
+					st.executeUpdate();
+				}
+				//pst.executeUpdate(querry);
+				*/
+				//map.forEach((k, v) -> System.out.println(k + " " + v)); 
+				pst.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return map;
+			}
+		
+
+	
+	
+	
+	
+	
+	
+	public static Map<String,List<Item>> getAllListsWithItems(){
+	//	List<ItemList> lista=new ArrayList<>();
+		HashMap<String,List<Item>> map=new HashMap<>();
+		try {
+			Connection conn = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test",dbUser,dbPass);
+			String querry="Select  item.id, item.name, item.itemtype, ITIL.ITEM_LIST_ID, list.title   from item inner join  item_to_item_list ITIL on item.id=ITIL.item_id inner join itemlist list on list.id = ITIL.ITEM_LIST_ID where ITIL.item_list_id=any (select ID from ITEMLIST) AND list.id NOT IN (SELECT ID_LIST FROM FINAL_LIST)";
+			Statement pst = conn.createStatement();
+			ResultSet rs=pst.executeQuery(querry);
+			int idList=0;
+			int idItem=0;
+			String numeItem;
+			String itemType;
+			String numeList;
+			Item object=new Item();
+			while(rs.next()) {
+				 idList=rs.getInt("ITEM_LIST_ID");
+				 idItem=rs.getInt("ID");
+				 numeItem=rs.getString("NAME");
+				 itemType=rs.getString("ITEMTYPE");
+				 numeList=rs.getString("TITLE");
+				 object=new Item(idItem,numeItem,CreateItemMenu.toItemType(itemType));
+				 if(map.containsKey(numeList)) {
+					 List<Item> list=map.get(numeList);
+					 list.add(object);
+					 map.put(numeList,list);
+				 }
+				 else {
+						List<Item> lista=new ArrayList<>();
+						lista.add(object);
+						map.put(numeList,lista);	
+				 }
+					
+			}
+			/*for(Item i:a) {
+				PreparedStatement st = conn.prepareStatement("INSERT INTO ITEM_TO_ITEM_LIST(ITEM_ID,ITEM_LIST_ID) values(?,?)");
+				st.setInt(1, i.getId());
+				st.setInt(2, id);
+				st.executeUpdate();
+			}
+			//pst.executeUpdate(querry);
+			*/
+			//map.forEach((k, v) -> System.out.println(k + " " + v)); 
+			pst.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return map;
+		}
+	
+
 }

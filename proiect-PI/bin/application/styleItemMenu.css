@@ -11,64 +11,64 @@
 	-fx-color:#dcddde;
 }
 #createButton{
-	 -fx-pref-width:300px;
+	 -fx-pref-width:520px;
 }
 #label1{
-	-fx-pref-width:400px;
+	-fx-pref-width:550px;
 	-fx-pref-height:17px;
 	-fx-font-size:23px;
-	-fx-translate-x:50px;
-	-fx-translate-y:40px;
+	-fx-translate-x:-250px;
+	-fx-translate-y:-250px;
 	-fx-font-family: "Georgia";
 }
 #label2{
 	 -fx-pref-width:180px;
 	 -fx-pref-height:10px;
 	-fx-font-size:20px;
-	-fx-translate-x:-40px;
+	-fx-translate-x:10px;
 	-fx-translate-y:110px;
 	-fx-font-family: "Georgia";
 }
 #t1{
 
-	-fx-translate-x:-205px;
+	-fx-translate-x:-100px;
 	-fx-translate-y:105px;
-	-fx-pref-width:260px;
+	-fx-pref-width:300px;
 
 	
 }
 #textField{
-	-fx-translate-x:-30px;
-	-fx-translate-y:145px;
-	-fx-pref-width:265px;
+	-fx-translate-x:-268px;
+	-fx-translate-y:-145px;
+	-fx-pref-width:499px;
 	
 }
 #label3{
 	 -fx-pref-height:10px;
-	-fx-pref-width:270px;
+	-fx-pref-width:500px;
 	-fx-font-size:20px;
-	-fx-translate-x:-215px;
-	-fx-translate-y:150px;
+	-fx-translate-x:-455px;
+	-fx-translate-y:-150px;
 	-fx-font-family: "Georgia";
 }	
 
 #choicebox{
-	-fx-pref-height:17px;
-	-fx-pref-width:300px;
+	-fx-pref-height:15px;
+	-fx-pref-width:515px;
 	-fx-font-size:17px;
-	-fx-translate-x:-455px;
-	-fx-translate-y:190px;
+	-fx-translate-x:-550px;
+	-fx-translate-y:-55px;
 	-fx-font-family: "Georgia";
 }
 #l4{
 	-fx-pref-height:10px;
-	-fx-pref-width:200px;
+	-fx-pref-width:450px;
 	-fx-font-size:20px;
-	-fx-translate-x:-680px;
-	-fx-translate-y:190px;
+	-fx-translate-x:-730px;
+	-fx-translate-y:-50px;
 	-fx-font-family: "Georgia";
 	
 }
 #backButton{
-	-fx-pref-width:300px;
+	-fx-pref-width:520px;
 }

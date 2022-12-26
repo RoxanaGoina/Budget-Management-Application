@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 //import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,12 +21,12 @@ public class MainMenuInterface {
 private Button addItem=new Button("Creare item");
 private Button createList=new Button("Creare listă de achiziții");
 private Button vizual=new Button("Vizualizare liste  de achiziții");
-private Button modif=new Button("Stergere Item");
+private Button modif=new Button("Ștergere Item");
 private Button vizualizerGraphic=new Button("Vizualizare grafic de achiziții ");
-private Button modifyGraphic=new Button("Modificare grafic de achiziții");
+//private Button modifyGraphic=new Button("Modificare grafic de achiziții");
 private Label header=new Label("Meniu principal");
-private Button exportButton=new Button("Exporta listă");
-private Button exitButton=new Button("Inchide aplicatia");
+private Button exportButton=new Button("Exportare liste");
+private Button exitButton=new Button("Închide aplicatia");
 
 
 public Scene showMainMenu(Stage primaryStage, double windowWidth, double windowHeight) {
@@ -46,27 +47,31 @@ public Scene showMainMenu(Stage primaryStage, double windowWidth, double windowH
 				MainMenu.noConnectionLabel.setText("");
 	    }
 	});
-	addItem.setId("addItem");
+	
+		addItem.setId("addItem");
 	createList.setId("createList");
 	header.setId("header");
 	vizual.setId("vizual");
 	modif.setId("modif");
 	exportButton.setId("export");
 	vizualizerGraphic.setId("vizualizerGraphic");
-	modifyGraphic.setId("modifyGraphic");
+//	modifyGraphic.setId("modifyGraphic");
 	exitButton.setId("exitButton");
+	root.setId("vbox");
+	root.setMargin(addItem, new Insets(20, 0, 0, 0));
+	root.setMargin(exitButton,new Insets(0,0,-40,0));
 	addItem.setFocusTraversable(false);
 	createList.setFocusTraversable(false);
 	vizual.setFocusTraversable(false);
 	modif.setFocusTraversable(false);
 	vizualizerGraphic.setFocusTraversable(false);
-	modifyGraphic.setFocusTraversable(false);
+	//modifyGraphic.setFocusTraversable(false);
 	exitButton.setFocusTraversable(false);
 	exportButton.setFocusTraversable(false);
 	a.getStylesheets().add(getClass().getResource("styleMainMenuInterface.css").toExternalForm());
 	root.setAlignment(Pos.CENTER);
 	root.setSpacing(15);
-	root.getChildren().addAll(addItem,modif,createList,vizual,vizualizerGraphic,modifyGraphic,exportButton,exitButton,header);
+	root.getChildren().addAll(addItem,modif,createList,vizual,vizualizerGraphic,exportButton,exitButton,header);
 	addItem.setOnMouseClicked(e->{
 		if(e.getButton()==MouseButton.PRIMARY)
 			primaryStage.setScene((new CreateItemMenu()).create(primaryStage, windowWidth, windowHeight));
@@ -83,6 +88,16 @@ public Scene showMainMenu(Stage primaryStage, double windowWidth, double windowH
 	exitButton.setOnMouseClicked(e -> {
 		if(e.getButton() == MouseButton.PRIMARY)
 			primaryStage.close();
+	});
+	vizual.setOnMouseClicked(e->{
+		if(e.getButton()==MouseButton.PRIMARY)
+			primaryStage.setScene((new FinalizeMenu().finalization(primaryStage, windowWidth, windowHeight)));
+		
+	});
+	exportButton.setOnMouseClicked(e->{
+		if(e.getButton()==MouseButton.PRIMARY)
+			primaryStage.setScene((new ExportListMenu().export(primaryStage, windowWidth, windowHeight)));
+		
 	});
 	return a;
 	

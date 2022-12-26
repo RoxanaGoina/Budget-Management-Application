@@ -14,7 +14,7 @@ public class Main extends Application {
 	
 	
 	public void start(Stage primaryStage) {
-		OpenApp A = new OpenApp(1100,685);
+		OpenApp A = new OpenApp(900,600);
 		A.openWindow(primaryStage);
 	}
 	
