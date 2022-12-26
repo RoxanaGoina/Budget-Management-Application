@@ -12,6 +12,10 @@ public Item(int id, String name, ItemType itemType) {
 public Item() {
 	
 }
+public Item(String name,ItemType itemType) {
+	this.name=name;
+	this.itemType=itemType;
+}
 public int getId() {
 	return id;
 }

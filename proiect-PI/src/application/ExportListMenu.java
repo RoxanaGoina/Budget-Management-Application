@@ -1,15 +1,19 @@
 package application;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
@@ -30,6 +34,19 @@ public void showList(Map<String, List<Item>> map1) {
 		String title=(String)choiceBox.getValue();
 		lista= map1.get(title);
 }
+public List<Item> getTextAreaText(TextArea textArea){
+	String[] split = textArea.getText().split("\n");
+	List<Item> list=new ArrayList<>();
+	for (String s : split) {
+		String s1[] = s.split("\\|");
+		String name = s1[0];
+		String itemType = s1[1];
+		Item item1 = new Item(name, CreateListMenu.toItemType(itemType));
+		list.add(item1);
+}
+	return list;
+}
+
 
 public Scene export(Stage primaryStage, double windowWidth, double windowHeight) {
 	FlowPane root=new FlowPane();
@@ -68,11 +85,25 @@ public Scene export(Stage primaryStage, double windowWidth, double windowHeight)
 		textArea.clear();
 		//Map<String, List<Item>> map=DataBaseOperations.getAllListsWithItems();
 		for(Item i: map.get(choiceBox.getValue())) {
-		textArea.appendText(i.getName()+" | "+i.getItemType());
+		textArea.appendText(i.getName()+"|"+i.getItemType());
 		textArea.appendText("\n");
 		}
 	});
 		}
+		
+	pdfButton.setOnAction(e->{
+		if(choiceBox.getSelectionModel().isEmpty()) {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Problema lista");
+			alert.setHeaderText("Selecteaza o lista");
+			alert.showAndWait();
+		}
+		System.out.println(getTextAreaText(textArea));
+		String title=(String) choiceBox.getValue();
+		
+		ExportPDF.exportList(getTextAreaText(textArea),title);
+	});
+	
 	return a;
 }
 	
