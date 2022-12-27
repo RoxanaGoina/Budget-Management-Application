@@ -99,6 +99,10 @@ public Scene showMainMenu(Stage primaryStage, double windowWidth, double windowH
 			primaryStage.setScene((new ExportListMenu().export(primaryStage, windowWidth, windowHeight)));
 		
 	});
+	vizualizerGraphic.setOnMouseClicked(e->{
+		if(e.getButton()==MouseButton.PRIMARY)
+			primaryStage.setScene((new GraphMenu().show(primaryStage, windowWidth, windowHeight)));
+	});
 	return a;
 	
 }

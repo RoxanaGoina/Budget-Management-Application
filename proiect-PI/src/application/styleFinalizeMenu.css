@@ -29,14 +29,14 @@
 	-fx-font-family: "Georgia";
 	-fx-translate-x:-60.0px;
 	-fx-translate-y:-140.0px;
-	-fx-pref-width:150.0px;
+	-fx-pref-width:210.0px;
 	
 }
 #choiceBoxText{
 	-fx-font-size: 22.0px;
 	-fx-pref-height:25.0px;
 	-fx-font-family: "Georgia";
-	-fx-translate-x:-670.0px;
+	-fx-translate-x:-750.0px;
 	-fx-translate-y:-140.0px;
 }
 

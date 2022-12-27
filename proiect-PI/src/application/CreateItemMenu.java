@@ -171,7 +171,7 @@ public class CreateItemMenu {
 				alert.setTitle("Problema Item");
 				alert.setHeaderText("Numele e null");
 				alert.showAndWait();
-				primaryStage.close();
+				//primaryStage.close();
 
 			}
 		if(choicebox.getSelectionModel().isEmpty())
@@ -180,7 +180,7 @@ public class CreateItemMenu {
 				alert.setTitle("Problema Item");
 				alert.setHeaderText("Alege categoria");
 				alert.showAndWait();
-				primaryStage.close();
+				//primaryStage.close();
 				return;
 			} else {
 				String name = textField.getText();
@@ -188,7 +188,15 @@ public class CreateItemMenu {
 				System.out.println(name + " " + type);
 				t1.clear();
 				textField.clear();
-
+				for(int i=0;i<name.length();i++) {
+					if(!Character.isDigit(name.charAt(i)))
+					{Alert alert = new Alert(AlertType.WARNING);
+					alert.setTitle("Problema Item");
+					alert.setHeaderText("Numele Item-ului contine cifre");
+					alert.showAndWait();
+				}
+					return;
+					}
 				Item item = new Item(0, name, toItemType(type));
 				// List<Item> List = DataBaseOperations.listItem();
 				if (DataBaseOperations.listItem().size() >= 1) {
@@ -198,10 +206,14 @@ public class CreateItemMenu {
 						DataBaseOperations.add(item);
 						//System.out.println("CEVA");
 						// List=DataBaseOperations.listItem();
-
 					}
 				} else
 					DataBaseOperations.add(item);
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Adnotare produs");
+				alert.setHeaderText("Produsul a fost adaugat cu succes");
+				alert.showAndWait();
+
 			}
 
 		});

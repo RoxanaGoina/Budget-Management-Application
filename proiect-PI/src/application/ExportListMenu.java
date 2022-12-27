@@ -2,6 +2,9 @@ package application;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +37,15 @@ public void showList(Map<String, List<Item>> map1) {
 		String title=(String)choiceBox.getValue();
 		lista= map1.get(title);
 }
+Comparator<Item> compare = new Comparator<>() {
+	public int compare(Item a1, Item a2) {
+		if (a1.getItemType().equals(a2.getItemType())) {
+			return a1.getName().compareTo(a2.getName());
+		} else {
+			return a1.getItemType().compareTo(a2.getItemType());
+		}
+	}
+};
 public List<Item> getTextAreaText(TextArea textArea){
 	String[] split = textArea.getText().split("\n");
 	List<Item> list=new ArrayList<>();
@@ -43,14 +55,13 @@ public List<Item> getTextAreaText(TextArea textArea){
 		String itemType = s1[1];
 		Item item1 = new Item(name, CreateListMenu.toItemType(itemType));
 		list.add(item1);
+		
 }
+	Collections.sort(list,compare);
+	
 	return list;
 }
-
-
-public Scene export(Stage primaryStage, double windowWidth, double windowHeight) {
-	FlowPane root=new FlowPane();
-	Scene a = new Scene(root, windowWidth, windowHeight);
+public void css() {
 	header.setId("header");
 	header.setFocusTraversable(false);
 	title.setId("title");
@@ -71,6 +82,12 @@ public Scene export(Stage primaryStage, double windowWidth, double windowHeight)
 	header.setTextFill(Color.color(0.50, 0.047,0.66));
 	title.setTextFill(Color.color(0.013, 0.64, 0.624));
 	textArea.setEditable(false);
+}
+
+public Scene export(Stage primaryStage, double windowWidth, double windowHeight) {
+	FlowPane root=new FlowPane();
+	Scene a = new Scene(root, windowWidth, windowHeight);
+	css();
 	a.getStylesheets().add(getClass().getResource("ExportListMenu.css").toExternalForm());
 	root.getChildren().addAll(header,title,choiceBox,textArea,backButton,csvButton,pdfButton);
 	root.setAlignment(Pos.CENTER);
@@ -92,7 +109,9 @@ public Scene export(Stage primaryStage, double windowWidth, double windowHeight)
 		}
 		
 	pdfButton.setOnAction(e->{
+		int ok=0;
 		if(choiceBox.getSelectionModel().isEmpty()) {
+			ok=1;
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Problema lista");
 			alert.setHeaderText("Selecteaza o lista");
@@ -100,10 +119,35 @@ public Scene export(Stage primaryStage, double windowWidth, double windowHeight)
 		}
 		System.out.println(getTextAreaText(textArea));
 		String title=(String) choiceBox.getValue();
+		if(ok==0) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Alerta informationala");
+			alert.setHeaderText("Lista a fost exportata cu succes in formatul dorit");
+			alert.showAndWait();	
+		}
 		
 		ExportPDF.exportList(getTextAreaText(textArea),title);
 	});
-	
+	csvButton.setOnAction(e->{
+		int ok=0;
+		if(choiceBox.getSelectionModel().isEmpty()) {
+			ok=1;
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Problema lista");
+			alert.setHeaderText("Selecteaza o lista");
+			alert.showAndWait();
+		}
+		
+		System.out.println(getTextAreaText(textArea));
+		String title=(String) choiceBox.getValue();
+		ExportCSV.exportList(getTextAreaText(textArea), title);
+		if(ok==0) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Alerta informationala");
+			alert.setHeaderText("Lista a fost exportata cu succes in formatul dorit");
+			alert.showAndWait();
+		}
+	});
 	return a;
 }
 	

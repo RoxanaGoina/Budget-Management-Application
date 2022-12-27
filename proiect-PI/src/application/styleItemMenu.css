@@ -11,24 +11,17 @@
 	-fx-color:#dcddde;
 }
 #createButton{
-	 -fx-pref-width:520px;
+	 -fx-pref-width:545px;
 }
 #label1{
-	-fx-pref-width:550px;
+	-fx-pref-width:570px;
 	-fx-pref-height:17px;
 	-fx-font-size:23px;
-	-fx-translate-x:-250px;
+	-fx-translate-x:-220px;
 	-fx-translate-y:-250px;
 	-fx-font-family: "Georgia";
 }
-#label2{
-	 -fx-pref-width:180px;
-	 -fx-pref-height:10px;
-	-fx-font-size:20px;
-	-fx-translate-x:10px;
-	-fx-translate-y:110px;
-	-fx-font-family: "Georgia";
-}
+
 #t1{
 
 	-fx-translate-x:-100px;
@@ -38,14 +31,14 @@
 	
 }
 #textField{
-	-fx-translate-x:-268px;
+	-fx-translate-x:-270px;
 	-fx-translate-y:-145px;
-	-fx-pref-width:499px;
+	-fx-pref-width:555px;
 	
 }
 #label3{
 	 -fx-pref-height:10px;
-	-fx-pref-width:500px;
+	-fx-pref-width:505px;
 	-fx-font-size:20px;
 	-fx-translate-x:-455px;
 	-fx-translate-y:-150px;
@@ -53,22 +46,22 @@
 }	
 
 #choicebox{
-	-fx-pref-height:15px;
-	-fx-pref-width:515px;
+	-fx-pref-height:20px;
+	-fx-pref-width:573px;
 	-fx-font-size:17px;
-	-fx-translate-x:-550px;
+	-fx-translate-x:-533px;
 	-fx-translate-y:-55px;
 	-fx-font-family: "Georgia";
 }
 #l4{
 	-fx-pref-height:10px;
-	-fx-pref-width:450px;
+	-fx-pref-width:495px;
 	-fx-font-size:20px;
-	-fx-translate-x:-730px;
+	-fx-translate-x:-720px;
 	-fx-translate-y:-50px;
 	-fx-font-family: "Georgia";
 	
 }
 #backButton{
-	-fx-pref-width:520px;
+	-fx-pref-width:539px;
 }

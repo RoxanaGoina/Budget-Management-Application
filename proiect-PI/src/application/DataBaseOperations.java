@@ -6,11 +6,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.chrono.ChronoLocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.h2.store.Data;
 
 public class DataBaseOperations {
 	private static String dbUser = "sa";
@@ -292,15 +300,6 @@ public static void createList(List<Item>a,String title) {
 				 }
 					
 			}
-			/*for(Item i:a) {
-				PreparedStatement st = conn.prepareStatement("INSERT INTO ITEM_TO_ITEM_LIST(ITEM_ID,ITEM_LIST_ID) values(?,?)");
-				st.setInt(1, i.getId());
-				st.setInt(2, id);
-				st.executeUpdate();
-			}
-			//pst.executeUpdate(querry);
-			*/
-			//map.forEach((k, v) -> System.out.println(k + " " + v)); 
 			pst.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -308,6 +307,37 @@ public static void createList(List<Item>a,String title) {
 		}
 		return map;
 		}
-	
+	public static HashMap<String, Double> extractDataFromFinalList() {
+		FinalList finalList=new FinalList();
+		HashMap<String, Double> map=new HashMap<>();
+		Connection conn;
+		try {
+			conn = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test",dbUser,dbPass);
+			String querry="Select  date,price from Final_List  where  MONTH(CURDATE())=extract(month from date)";
+			Statement pst = conn.createStatement();
+			ResultSet rs=pst.executeQuery(querry);
+			Date data;
+			double price=0;
+			while(rs.next()) {
+			data= rs.getDate("Date");
+			DateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+			String strDate=sdf.format(data);
+			//System.out.println(strDate);
+			//LocalDate date = data.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			//LocalDate d=Date.valueOf(data);
+			//LocalDate.of(data.getYear(), data.getMonth()+1, data.getDate());
+			price=rs.getDouble("price");
+			map.put(strDate,Double.valueOf(price));
+			}
+		//System.out.println(map.toString());
+		return map;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return map;
+		
+		
+	}
 
 }
