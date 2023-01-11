@@ -73,8 +73,10 @@ public Scene showMainMenu(Stage primaryStage, double windowWidth, double windowH
 	root.setSpacing(15);
 	root.getChildren().addAll(addItem,modif,createList,vizual,vizualizerGraphic,exportButton,exitButton,header);
 	addItem.setOnMouseClicked(e->{
-		if(e.getButton()==MouseButton.PRIMARY)
+		if(e.getButton()==MouseButton.PRIMARY) {
 			primaryStage.setScene((new CreateItemMenu()).create(primaryStage, windowWidth, windowHeight));
+			DataBaseOperations.check("Ananas");
+		}
 	});
 	createList.setOnMouseClicked(e->{
 		if(e.getButton()==MouseButton.PRIMARY)

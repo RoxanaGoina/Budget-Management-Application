@@ -72,13 +72,17 @@ public class CreateListMenu {
 			return ItemType.Altele;
 		return null;
 	}
-	public boolean ListContainsItem(List<String> list,String a) {
-		for(String i : list)
-			if(i.equals(a))
+
+	public boolean ListContainsItem(List<String> list, String a) {
+		
+		for (String i : list)
+			//if(list.contains(i))
+			if (i.equals(a))
 				return true;
-			else return false;
+			
 		return false;
 	}
+
 	public Scene create(Stage primaryStage, double windowWidth, double windowHeight) {
 		primaryStage.setWidth(windowWidth);
 		primaryStage.setHeight(windowHeight);
@@ -152,20 +156,19 @@ public class CreateListMenu {
 
 		List<String> list = new ArrayList<>();
 		addButton.setOnMouseClicked(e -> {
-			List<String> list1 = new ArrayList<>();
+		//	List<String> list1 = new ArrayList<>();
 			if (e.getButton() == MouseButton.PRIMARY) {
 				String item = choiceBox.getValue();
-				
-				if(ListContainsItem(list, item)==true) { 
+
+				if (ListContainsItem(list, item) == true) {
 					Alert alert = new Alert(AlertType.WARNING);
 					alert.setTitle("Problema lista");
 					alert.setHeaderText("Obiectul adaugat exista deja");
-					alert.showAndWait();	
+					alert.showAndWait();
+				} else {
+					textArea.appendText(item + "\n");
+					list.add(item);
 				}
-				else
-					{textArea.appendText(item + "\n");
-					   list.add(item);
-					}
 			}
 			System.out.println(list);
 		});
@@ -179,7 +182,7 @@ public class CreateListMenu {
 					alert.setTitle("Problema lista");
 					alert.setHeaderText("Lista este goala");
 					alert.showAndWait();
-				
+
 				} else {
 					String[] split = textArea.getText().split("\n");
 					for (String s : split) {
@@ -197,11 +200,17 @@ public class CreateListMenu {
 						alert.setHeaderText("Numele listei e null");
 						// alert.setContentText("Connect to the database successfully!");
 						alert.showAndWait();
-					
+
 					}
 					boolean isNameDiff = DataBaseOperations.isNameDifferent(title);
 					if (isNameDiff == true) {
 						DataBaseOperations.createList(listaIT, title);
+						Alert alert = new Alert(AlertType.INFORMATION);
+						alert.setTitle("Informare");
+						alert.setHeaderText("Lista a fost creată cu succes");
+						alert.showAndWait();
+						primaryStage.setScene(
+						(new MainMenuInterface()).showMainMenu(primaryStage, windowWidth, windowHeight));
 					} else {
 
 						Alert alert = new Alert(AlertType.WARNING);
@@ -214,11 +223,7 @@ public class CreateListMenu {
 					}
 
 					// System.out.println(listaIT);
-					Alert alert = new Alert(AlertType.INFORMATION);
-					alert.setTitle("Informare");
-					alert.setHeaderText("Lista a fost creată cu succes");
-					alert.showAndWait();
-					primaryStage.setScene((new MainMenuInterface()).showMainMenu(primaryStage, windowWidth, windowHeight));
+
 					// Select * from item inner join item_to_item_list on
 					// item.id=item_to_item_list.item_id where
 					// item_to_item_list.item_list_id=(select ID from ITEMLIST order by 1 desc limit

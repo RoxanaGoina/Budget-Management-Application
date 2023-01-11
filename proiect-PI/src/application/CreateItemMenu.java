@@ -166,58 +166,64 @@ public class CreateItemMenu {
 		});
 		createButton.setOnMouseClicked(e -> {
 			// int id=Integer.parseInt(t1.getText());
-			if (textField.getText().isBlank()) {
+			
+			 if(textField.getText().isBlank() && choicebox.getSelectionModel().isEmpty())	{
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Problema Item");
+				alert.setHeaderText("Numele si Categoria lipsesc");
+				alert.showAndWait();		
+				}
+			
+			 else if (textField.getText().isBlank()) {
 				Alert alert = new Alert(AlertType.WARNING);
 				alert.setTitle("Problema Item");
 				alert.setHeaderText("Numele e null");
 				alert.showAndWait();
-				//primaryStage.close();
-
 			}
-		if(choicebox.getSelectionModel().isEmpty())
-		 {
-				Alert alert = new Alert(AlertType.WARNING);
-				alert.setTitle("Problema Item");
-				alert.setHeaderText("Alege categoria");
-				alert.showAndWait();
-				//primaryStage.close();
-				return;
-			} else {
-				String name = textField.getText();
-				String type = choicebox.getValue();
-				System.out.println(name + " " + type);
-				t1.clear();
-				textField.clear();
-				for(int i=0;i<name.length();i++) {
-					if(!Character.isDigit(name.charAt(i)))
-					{Alert alert = new Alert(AlertType.WARNING);
+			else if(choicebox.getSelectionModel().isEmpty())
+			 {
+					Alert alert = new Alert(AlertType.WARNING);
 					alert.setTitle("Problema Item");
-					alert.setHeaderText("Numele Item-ului contine cifre");
+					alert.setHeaderText("Alege categoria");
 					alert.showAndWait();
-				}
-					return;
+					//primaryStage.close();
+				//	return;
+			 }
+			 else {
+					String name = textField.getText();
+					String type = choicebox.getValue();
+					System.out.println(name + " " + type);
+					t1.clear();
+					textField.clear();
+					for(int i=0;i<name.length();i++) {
+						if(Character.isDigit(name.charAt(i)))
+						{Alert alert = new Alert(AlertType.WARNING);
+						alert.setTitle("Problema Item");
+						alert.setHeaderText("Numele Item-ului contine cifre");
+						alert.showAndWait();
 					}
-				Item item = new Item(0, name, toItemType(type));
-				// List<Item> List = DataBaseOperations.listItem();
-				if (DataBaseOperations.listItem().size() >= 1) {
-					if (DataBaseOperations.itemAlreadyExists(item) == true)
-						System.out.println("Produsul deja exista");
-					else {
+						//return;
+						}
+					Item item = new Item(0, name, toItemType(type));
+					// List<Item> List = DataBaseOperations.listItem();
+					if (DataBaseOperations.listItem().size() >= 1) {
+						if (DataBaseOperations.itemAlreadyExists(item) == true)
+							System.out.println("Produsul deja exista");
+						else {
+							DataBaseOperations.add(item);
+							//System.out.println("CEVA");
+							// List=DataBaseOperations.listItem();
+						}
+					} else
 						DataBaseOperations.add(item);
-						//System.out.println("CEVA");
-						// List=DataBaseOperations.listItem();
-					}
-				} else
-					DataBaseOperations.add(item);
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Adnotare produs");
-				alert.setHeaderText("Produsul a fost adaugat cu succes");
-				alert.showAndWait();
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Adnotare produs");
+					alert.setHeaderText("Produsul a fost adaugat cu succes");
+					alert.showAndWait();
 
-			}
+				}
 
-		});
-
+			});
 		return a;
 	}
 

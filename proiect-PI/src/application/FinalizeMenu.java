@@ -127,7 +127,7 @@ public class FinalizeMenu {
 		dp.setOnAction(e->{
 			LocalDate myDate=dp.getValue();
 			String format=myDate.format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-			System.out.println(format);
+			//System.out.println(format);
 			if(myDate.isAfter(LocalDate.now()))
 			{
 				Alert alert = new Alert(AlertType.WARNING);
