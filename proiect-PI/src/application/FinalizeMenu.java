@@ -29,7 +29,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
+/**
+ * 
+ * @author Roxana Goina
+ *
+ */
 public class FinalizeMenu {
 	private Label title1=new Label("Vizualizare");
 	private Label title2=new Label("Finalizare");
@@ -60,7 +64,13 @@ public class FinalizeMenu {
 		FinalList finalList=new FinalList(myDate,price,list);
 		return finalList;
 	}
-	
+	/**
+	 * Metoda creeaza fereastra aplicatiei care permite exportul listelor de achizitii
+	 * @param primaryStage
+	 * @param windowWidth
+	 * @param windowHeight
+	 * @return Metoda returneaza fereastra creata.
+	 */
 	public Scene finalization(Stage primaryStage, double windowWidth, double windowHeight) {
 		FlowPane root=new FlowPane();
 		Scene a = new Scene(root, windowWidth, windowHeight);

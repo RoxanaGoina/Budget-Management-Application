@@ -16,7 +16,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
+/**
+ * 
+ * @author Roxana Goina
+ *
+ */
 public class MainMenuInterface {
 private Button addItem=new Button("Creare item");
 private Button createList=new Button("Creare listă de achiziții");
@@ -28,7 +32,15 @@ private Label header=new Label("Meniu principal");
 private Button exportButton=new Button("Exportare liste");
 private Button exitButton=new Button("Închide aplicatia");
 
-
+/**
+ * 
+ * @param primaryStage
+ * @param windowWidth
+ * @param windowHeight
+ * Metoda creeaza fereastra aplicatiei pentru meniul principal care conduce la functionalitatile propriu-zise ale aplicatiei.
+ * @return Se returnează un obiect de tipul Scene care include toate obiectele care permit realizarea interfetei grafice.
+ * 
+ */
 public Scene showMainMenu(Stage primaryStage, double windowWidth, double windowHeight) {
 	VBox root=new VBox();
 	Scene a=new Scene(root,windowWidth,windowHeight);

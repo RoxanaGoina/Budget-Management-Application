@@ -2,8 +2,15 @@ package application;
  
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
+/**
+ * 
+ * @author Roxana Goina
+ *
+ */
 public class AppTest {
+	/**
+	 * Metodele constituie testele unitare din cadrul aplicatiei.
+	 */
 	@Test
 	void test() {
 		Assertions.assertEquals(true,DataBaseOperations.check("Mere"));

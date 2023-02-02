@@ -27,7 +27,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
+/**
+ * 
+ * @author Roxana Goina
+ *
+ */
 public class CreateItemMenu {
 	private Label label1 = new Label("Creare item");
 	private Label label2 = new Label("ID");
@@ -38,7 +42,12 @@ public class CreateItemMenu {
 	private ChoiceBox<String> choicebox = new ChoiceBox<>();
 	private Label l4 = new Label("Tip");
 	private Button backButton = new Button("Înapoi");
-
+/**
+ * Metoda primeste un obiect String care este categoria unui obiect.
+ * @param type -categoria unui item
+ * @return Metoda returneaza un obiect cu acelasi nume ca si parametrul type,insa nu e de tipul String,este un obiect care 
+ * face parte din enumeratia ItemType.
+ */
 	public static ItemType toItemType(String type) {
 
 		if (ItemType.Patiserie.toString().equals(type))
@@ -67,7 +76,13 @@ public class CreateItemMenu {
 			return ItemType.Altele;
 		return null;
 	}
-
+/**
+ * Metoda creeaza fereastra aplicatiei care permite crearea unui obiect de tipul clasei Item
+ * @param primaryStage 
+ * @param windowWidth -reprezinta latimea ferestrei aplicatiei
+ * @param windowHeight-reprezinta lungimea ferestrei aplicatiei
+ * @return Metoda returneaza fereastra creata.
+ */
 	public Scene create(Stage primaryStage, double windowWidth, double windowHeight) {
 		HBox root = new HBox();
 		Scene a = new Scene(root, windowWidth, windowHeight);
@@ -125,6 +140,7 @@ public class CreateItemMenu {
 		choicebox.getItems().add(ItemType.Unelte.toString());
 		choicebox.getItems().add(ItemType.Combustibil.toString());
 		choicebox.getItems().add(ItemType.Altele.toString());
+		choicebox.getItems().add(ItemType.Decoratiuni.toString());
 		choicebox.setId("choicebox");
 		choicebox.setFocusTraversable(false);
 		a.getStylesheets().add(getClass().getResource("styleItemMenu.css").toExternalForm());
@@ -207,20 +223,27 @@ public class CreateItemMenu {
 					Item item = new Item(0, name, toItemType(type));
 					// List<Item> List = DataBaseOperations.listItem();
 					if (DataBaseOperations.listItem().size() >= 1) {
-						if (DataBaseOperations.itemAlreadyExists(item) == true)
+						if (DataBaseOperations.itemAlreadyExists(item) == true) {
 							System.out.println("Produsul deja exista");
+							Alert alert = new Alert(AlertType.INFORMATION);
+							alert.setTitle("Adnotare produs");
+							alert.setHeaderText("Produsul deja exista");
+							alert.showAndWait();
+						}
 						else {
 							DataBaseOperations.add(item);
-							//System.out.println("CEVA");
-							// List=DataBaseOperations.listItem();
+							Alert alert = new Alert(AlertType.INFORMATION);
+							alert.setTitle("Adnotare produs");
+							alert.setHeaderText("Produsul a fost adaugat cu succes");
+							alert.showAndWait();
 						}
-					} else
-						DataBaseOperations.add(item);
-					Alert alert = new Alert(AlertType.INFORMATION);
-					alert.setTitle("Adnotare produs");
-					alert.setHeaderText("Produsul a fost adaugat cu succes");
-					alert.showAndWait();
-
+					} //else {
+						//DataBaseOperations.add(item);
+					//Alert alert = new Alert(AlertType.INFORMATION);
+					//alert.setTitle("Adnotare produs");
+					//alert.setHeaderText("Produsul a fost adaugat cu succes");
+					//alert.showAndWait();
+					//}
 				}
 
 			});

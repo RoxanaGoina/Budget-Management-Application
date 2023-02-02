@@ -10,11 +10,11 @@
 }
 #choiceBox{
 	-fx-font-size: 20.0px;
-	-fx-pref-height:25.0px;
+	-fx-pref-height:23.0px;
 	-fx-font-family: "Georgia";
 	-fx-translate-x:-60.0px;
-	-fx-translate-y:-140.0px;
-	-fx-pref-width:250.0px;
+	-fx-translate-y:-80.0px;
+	-fx-pref-width:150.0px;
 	
 }
 #header{
@@ -29,7 +29,7 @@
 	-fx-pref-height:30.0px;
 	-fx-font-family: "Georgia";
 	-fx-translate-x:-97.0px;
-	-fx-translate-y:-140.0px;
+	-fx-translate-y:-80.0px;
 }
 #textArea{
     -fx-pref-height:225.0px;
@@ -39,16 +39,37 @@
 	-fx-font-family: "Georgia";
 }
 #backButton{
-	 -fx-translate-x:-630.0px;
-	-fx-translate-y:130.0px;
+	 -fx-translate-x:-610.0px;
+	-fx-translate-y:180.0px;
 }
 #pdfButton{ 
-	-fx-translate-x:60.0px;
-	-fx-translate-y:0.0px;
+	-fx-translate-x:75.0px;
+	-fx-translate-y:50.0px;
      -fx-pref-height:40.0px;
 	
 }
 #csvButton{
-	 -fx-pref-height:40.0px;
+	-fx-pref-height:40.0px;
+	fx-translate-x:1050.0px;
+	-fx-translate-y:50px;
+}
+#searchByPattern{
+	
+	-fx-translate-x:-230.0px;
+	-fx-translate-y:-280px;
+     -fx-pref-height:30.0px;
+}
+#patternImput{
+	fx-translate-x:-390.0px;
+	-fx-translate-y:-280.0px;
+     -fx-pref-height:40.0px;
+	
+}
+#search{
+	-fx-font-size: 24.0px;
+	-fx-pref-height:30.0px;
+	-fx-font-family: "Georgia";
+	-fx-translate-x:-340.0px;
+	-fx-translate-y:-280.0px;
 	
 }

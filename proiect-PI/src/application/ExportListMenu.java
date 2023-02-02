@@ -16,12 +16,19 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-
+/**
+ * 
+ * @author Roxana Goina
+ *
+ */
 public class ExportListMenu {
 private Label header=new Label("Export");
 private Label title=new Label("Selectează");
@@ -30,13 +37,22 @@ private TextArea textArea=new TextArea();
 private Button backButton=new Button("Înapoi");
 private Button csvButton=new Button("Export   CSV");
 private Button pdfButton=new Button("Export   PDF");
- 
+private Button searchByPattern=new Button("Cauta");
+private TextField patternImput=new TextField(); 
+private Label search=new Label("Cauta");
+/**
+ * Metoda contribuie la crearea unui choiceBox/ComboBox care ii permite utilizatorului sa aleaga lista pe care o doreste exportata
+ * @param map1
+ */
 public void showList(Map<String, List<Item>> map1) {
 		map1=DataBaseOperations.getAllListsForExport();
 		List<Item> lista=new ArrayList<>();
 		String title=(String)choiceBox.getValue();
 		lista= map1.get(title);
 }
+/**
+ * Suprascrierea operatorului de comparare. Acesta se foloseste in cazul listelor,deoarece obiectele din cadrul listelor sunt grupate pe categorii.
+ */
 Comparator<Item> compare = new Comparator<>() {
 	public int compare(Item a1, Item a2) {
 		if (a1.getItemType().equals(a2.getItemType())) {
@@ -46,6 +62,11 @@ Comparator<Item> compare = new Comparator<>() {
 		}
 	}
 };
+/**
+ * Metoda ia continutul din textArea si il stocheaza intr-o lista locala.
+ * @param textArea -continutul acestei zone reprezinta obiectele care vor constitui lista
+ * @return Metoda returneaza lista care contine obiectele din TextArea.
+ */
 public List<Item> getTextAreaText(TextArea textArea){
 	String[] split = textArea.getText().split("\n");
 	List<Item> list=new ArrayList<>();
@@ -82,31 +103,67 @@ public void css() {
 	header.setTextFill(Color.color(0.50, 0.047,0.66));
 	title.setTextFill(Color.color(0.013, 0.64, 0.624));
 	textArea.setEditable(false);
+	searchByPattern.setId("searchByPattern");
+	patternImput.setId("patternImput");
+	search.setId("search");
 }
-
+/**
+ * Metoda creeaza fereastra aplicatiei care ii permite utilizatorului sa exporte listele de achizitii
+ * @param primaryStage
+ * @param windowWidth
+ * @param windowHeight
+ * @return Metoda returneaza fereastra creata.
+ */
 public Scene export(Stage primaryStage, double windowWidth, double windowHeight) {
 	FlowPane root=new FlowPane();
 	Scene a = new Scene(root, windowWidth, windowHeight);
 	css();
 	a.getStylesheets().add(getClass().getResource("ExportListMenu.css").toExternalForm());
-	root.getChildren().addAll(header,title,choiceBox,textArea,backButton,csvButton,pdfButton);
+	root.getChildren().addAll(header,title,choiceBox,textArea,backButton,csvButton,pdfButton,search,patternImput,searchByPattern);
 	root.setAlignment(Pos.CENTER);
 	backButton.setOnMouseClicked(e -> {
 		if (e.getButton() == MouseButton.PRIMARY) {
 			primaryStage.setScene((new MainMenuInterface()).showMainMenu(primaryStage, windowWidth, windowHeight));
 	}});
+	csvButton.setTranslateX(430);
+	csvButton.setTranslateY(195);
+	patternImput.setTranslateX(-270);
+	patternImput.setPrefHeight(50);
+	//searchByPattern.setPrefHeight(20);
+	patternImput.setFont(Font.font("Verdana", 11.7));
 	Map<String, List<Item>> map=DataBaseOperations.getAllListsForExport();
-		for(String s: map.keySet()) {
-			choiceBox.getItems().add(s);
+		//for(String s: map.keySet()) {
+			//choiceBox.getItems().add(s);
+		//choiceBox.setOnAction(e->{
+	//	textArea.clear();
+	//	Map<String, List<Item>> map=DataBaseOperations.getAllListsWithItems();
+	
+		
+		searchByPattern.setOnAction(e->{
+			String pattern=patternImput.getText();
+			choiceBox.getItems().clear();
+			
+			if(pattern.equals("")) {
+				for(String s: map.keySet()) 
+					choiceBox.getItems().add(s);
+				}
+			else {
+				for(String s: map.keySet()) 
+					if(s.contains(pattern))
+					choiceBox.getItems().add(s);
+				
+			}
+		});
+		
 		choiceBox.setOnAction(e->{
-		textArea.clear();
-		//Map<String, List<Item>> map=DataBaseOperations.getAllListsWithItems();
-		for(Item i: map.get(choiceBox.getValue())) {
-		textArea.appendText(i.getName()+"|"+i.getItemType());
-		textArea.appendText("\n");
+			textArea.clear();
+			for(Item i: map.get(choiceBox.getValue())) {
+				textArea.appendText(i.getName()+"|"+i.getItemType());
+				textArea.appendText("\n");
 		}
-	});
-		}
+			
+		});
+		
 		
 	pdfButton.setOnAction(e->{
 		int ok=0;

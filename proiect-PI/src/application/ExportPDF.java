@@ -13,9 +13,17 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfDocument;
 import com.itextpdf.text.pdf.PdfWriter;
-
+/**
+ * 
+ * @author Roxana Goina
+ *
+ */
 public class ExportPDF implements ExportList {
-	
+	/**
+	 * Metoda realizeaza exportul unei liste de achizitii in format PDF
+	 * @param l -lista care se doreste a fi exportata 
+	 * @param name -numele listei
+	 */
 	public static void exportList(List<Item> l,String name) {
 		
 		String filePath = "C:\\Users\\user\\Desktop\\"+ name+ ".pdf";

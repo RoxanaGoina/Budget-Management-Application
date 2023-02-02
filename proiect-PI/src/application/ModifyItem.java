@@ -23,13 +23,25 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+/**
+ * 
+ * @author Roxana Goina
+ *
+ */
+
 public class ModifyItem {
 private Button deleteItem=new Button("Stergere item");
 private Label header=new Label("Selecteaza");
 private Label text=new Label("Stergere Item"); 
 private Button backButton=new Button("Inapoi");
 private ChoiceBox<String> choiceBox=new ChoiceBox<>();
-
+/**
+ * Metoda creeaza fereastra care permite stergerea unui obiect de tipul Item
+ * @param primaryStage
+ * @param windowWidth
+ * @param windowHeight
+ * @return Metoda returneaza fereastra creata
+ */
 public Scene create(Stage primaryStage, double windowWidth, double windowHeight) {
 	VBox root=new VBox();
 	Scene a=new Scene(root,windowWidth,windowHeight);

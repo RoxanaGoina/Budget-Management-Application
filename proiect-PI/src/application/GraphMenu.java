@@ -22,7 +22,11 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
-
+/**
+ * 
+ * @author Roxana Goina
+ *
+ */
 public class GraphMenu {
 HashMap<String, Double> map=DataBaseOperations.extractDataFromFinalList();
 private NumberAxis xAxis=new NumberAxis();
@@ -48,6 +52,13 @@ public void css() {
 	sum.setFocusTraversable(false);
 	
 }
+/**
+ * Metoda creeaza fereastra aplicatiei care permite vizualizarea graficului de achizitii
+ * @param primaryStage
+ * @param windowWidth
+ * @param windowHeight
+ * @return Metoda returneaza fereastra creata.
+ */
 public Scene show(Stage primaryStage, double windowWidth, double windowHeight) {
 	FlowPane root=new FlowPane();
 	Scene a = new Scene(root, windowWidth, windowHeight);

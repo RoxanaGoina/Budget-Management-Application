@@ -29,7 +29,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
+/**
+ * 
+ * @author Roxana Goina
+ *
+ */
 public class CreateListMenu {
 	private Label header = new Label("Creare lista");
 	private Button addButton = new Button("Adăugare item");
@@ -43,7 +47,12 @@ public class CreateListMenu {
 	private Button backButton = new Button("Înapoi");
 	private Button createList = new Button("Creare");
 	private TextArea textArea = new TextArea();
-
+	/**
+	 * Metoda primeste un obiect String care este categoria unui obiect.
+	 * @param type -categoria unui item
+	 * @return Metoda returneaza un obiect cu acelasi nume ca si parametrul type,insa nu e de tipul String,este un obiect care 
+	 * face parte din enumeratia ItemType.
+	 */
 	public static ItemType toItemType(String type) {
 
 		if (ItemType.Patiserie.toString().equals(type))
@@ -72,7 +81,13 @@ public class CreateListMenu {
 			return ItemType.Altele;
 		return null;
 	}
-
+/**
+ * Metoda primeste ca parametru o lista de obiecte de tipul String,list, 
+ * si un String,a, si verifica daca String-ul a se gaseste in list 
+ * @param list -lista de String-uri
+ * @param a 
+ * @return Metoda returneaza true daca a se afla in lista  list sau false in caz contrar.
+ */
 	public boolean ListContainsItem(List<String> list, String a) {
 		
 		for (String i : list)
@@ -82,7 +97,13 @@ public class CreateListMenu {
 			
 		return false;
 	}
-
+/**
+ * Metoda creeaza fereastra aplicatiei care permite realizarea unui obiect de tipul clasei ItemList
+ * @param primaryStage
+ * @param windowWidth -reprezinta latimea ferestrei aplicatiei
+ * @param windowHeight-reprezinta lungimea ferestrei aplicatiei
+ * @return Metoda returneaza fereastra creata.
+ */
 	public Scene create(Stage primaryStage, double windowWidth, double windowHeight) {
 		primaryStage.setWidth(windowWidth);
 		primaryStage.setHeight(windowHeight);

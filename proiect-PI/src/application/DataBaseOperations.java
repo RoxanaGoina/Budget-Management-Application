@@ -31,7 +31,10 @@ public class DataBaseOperations {
 			e.printStackTrace();
 		}
 	}
-
+/**
+ * Metoda verifica daca s-a realizat cu succes conectarea cu baza de date 
+ * @return Metoda returneaza true in cazul in care exista conexiunea spre baza de date si false in caz contrar.
+ */
 	public static boolean checkConnection() {
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test", dbUser, dbPass);
@@ -44,7 +47,11 @@ public class DataBaseOperations {
 			return false;
 		}
 	}
-
+/**
+ * Metoda verifica daca un String primit ca parametru exista deja in baza de date
+ * @param title -numele unei liste de achizitii
+ * @return Metoda returneaza true in cazul in care numele listei este unic ,false in caz contrar.  
+ */
 	public static boolean isNameDifferent(String title) {
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test", dbUser, dbPass);
@@ -70,7 +77,10 @@ public class DataBaseOperations {
 		openConnection();
 		checkConnection();
 	}
-
+/**
+ * Metoda realizeaza adaugarea unui obiect de tipul Item in tabelul din db cu acelasi nume
+ * @param a -obiectul de tipul Item
+ */
 	public static void add(Item a) {
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test", dbUser, dbPass);
@@ -87,7 +97,10 @@ public class DataBaseOperations {
 			e.printStackTrace();
 		}
 	}
-
+/**
+ * Metoda adauga in tabelul ITEMLIST un String care reprezinta numele unei liste de achizitii
+ * @param a -numele unei liste de achizitii
+ */
 	public static void addItemTitle(String a) {
 		Connection conn;
 		try {
@@ -99,7 +112,11 @@ public class DataBaseOperations {
 		}
 
 	}
-
+/**
+ * Metoda creeaza o lista de achizitii
+ * @param a -lista de obiecte 
+ * @param title -numele listei
+ */
 	public static void createList(List<Item> a, String title) {
 		Connection conn;
 		try {
@@ -125,7 +142,12 @@ public class DataBaseOperations {
 			e.printStackTrace();
 		}
 	}
-
+/**
+ * Metoda este folosita pentru procesul de ”finalizare ” al listelor de achizitii. Acest proces consta in faptul ca listei 
+ * i se atribuie un pret si o data calendaristica.
+ * @param finalList -lista care urmeaza sa fie finalizata
+ * @param title -numele listei de achizitii
+ */
 	public static void addIntoTableFinalList(FinalList finalList, String title) {
 		Connection conn;
 		try {
@@ -160,7 +182,10 @@ public class DataBaseOperations {
 		}
 
 	}
-
+/**
+ * Metoda aduce din db obiectele unei liste de achizitii si le stocheaza local intr-o lista
+ * @return Metoda returneaza lista de obiecte creata cu obiectele din baza de date. 
+ */
 	public static List<Item> listItem() {
 		try {
 			List<Item> ItemList = new ArrayList<>();
@@ -184,7 +209,11 @@ public class DataBaseOperations {
 		//return null;
 		return null;
 	}
-
+/**
+ * Metoda verifica daca  un obiect exista  in baza de date.
+ * @param a - obiectul asupra caruia se face verificarea
+ * @return Metoda returneaza true daca  acel obiect exista si false in caz contrar.
+ */
 	public static boolean itemAlreadyExists(Item a) {
 		for (Item i : DataBaseOperations.listItem()) {
 			if (i.getName().equals(a.getName()) && i.getItemType().toString().equals(a.getItemType().toString()))
@@ -193,7 +222,10 @@ public class DataBaseOperations {
 		return false;
 
 	}
-
+/**
+ * Metoda sterge un obiect de tipul Item din baza de date
+ * @param s- Obiectul de tip Item pe care dorim sa il stergem.
+ */
 	public static void delete(String s) {
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test", dbUser, dbPass);
@@ -204,7 +236,7 @@ public class DataBaseOperations {
 			// ResultSet rs=pst.executeQuery();
 			pst.close();
 		} catch (SQLException e) {
-			System.out.println("Nu s-a adaugat produsul");
+			System.out.println("Nu s-a putut sterge produsul");
 			e.printStackTrace();
 		}
 	}
@@ -303,7 +335,11 @@ public class DataBaseOperations {
 		}
 		return map;
 	}
-
+/**
+ * Metoda este utilizata pentru crearea graficului de achizitii.
+ * @return Metoda returneaza un obiect de tipul HashMap care are ca si cheie o data calendaristica(se face conversia 
+ * de la tipul Date la tipul String)  iar valoarea este reprezentata de suma incarcata pe listele de achizitii finalizate
+ */
 	public static HashMap<String, Double> extractDataFromFinalList() {
 		FinalList finalList = new FinalList();
 		HashMap<String, Double> map = new HashMap<>();
@@ -342,7 +378,11 @@ public class DataBaseOperations {
 		return map;
 
 	}
-
+/**
+ * Metoda verifica daca un obiect exista in baza de date
+ * @param nume -numele obiectului asupra caruia se realizeaza verificarea
+ * @return Metoda returneaza true daca obiectul exista in baza de date si false in caz contrar.
+ */
 	public static boolean check(String nume) {
 		try {//Connection con = null;
 			Connection conn = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test", dbUser, dbPass);
@@ -364,6 +404,11 @@ public class DataBaseOperations {
 
 		return false;
 	}
+	/**
+	 * Metoda verifica daca un obiect a fost sters din baza de date
+	 * @param nume -numele Item-ului pe care am vrut sa il stergem 
+	 * @return Metoda returneaza true in cazul in care Item-ul a fost sters cu succes si false in caz contrar.
+	 */
 	public static boolean  checkDelete(String nume) {
 		try {//Connection con = null;
 			Connection conn = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test", dbUser, dbPass);
@@ -384,6 +429,11 @@ public class DataBaseOperations {
 		}
 		return false;
 	}
+	/**
+	 * Metoda verifica daca numele unei liste de achizitii exista deja in baza de date
+	 * @param nume-numele listei 
+	 * @return Metoda returneaza true daca numele exista deja in baza de date si false in caz contrar.
+	 */
 	public static boolean checkIfListExists(String nume) {
 		try {//Connection con = null;
 			Connection conn = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test", dbUser, dbPass);

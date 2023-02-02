@@ -7,9 +7,17 @@ import java.util.List;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
-
+/**
+ * 
+ * @author Roxana Goina
+ *
+ */
 public  class ExportCSV implements ExportList {
-
+/**
+ * Metoda realizeaza exportul CSV a unei liste de achizitii 
+ * @param l -lista care se doreste exportata
+ * @param name -numele listei 
+ */
 	public static void exportList(List<Item> l,String name) {
 		File resFile = new File("C:\\Users\\user\\Desktop\\" + name+".csv");
 		try (FileWriter fileWriter = new FileWriter(resFile)) {
