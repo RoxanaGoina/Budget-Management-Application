@@ -1,0 +1,33 @@
+.button{
+    -fx-font-size: 20px;
+    -fx-pref-width:100px;
+    -fx-pref-height:25px;
+    -fx-font-family: "Georgia";
+    -fx-border-radius:4px;
+    -fx-border-color:black;
+    -fx-border-width: 1px;
+}
+.button:hover{
+	-fx-color:#dcddde;
+}
+#lineChart{
+	
+}
+#backButton{
+	-fx-translate-x:-530px;
+	-fx-translate-y:190px;
+}
+#total{
+	-fx-pref-height:10px;
+	-fx-font-size:25px;
+	-fx-font-family: "Georgia";
+	-fx-translate-x:-130px;
+	-fx-translate-y:190px;
+}
+#sum{
+	-fx-pref-height:10px;
+	-fx-font-size:25px;
+	-fx-font-family: "Georgia";
+	-fx-translate-x:-110px;
+	-fx-translate-y:190px;
+}

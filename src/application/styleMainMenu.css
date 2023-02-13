@@ -1,0 +1,27 @@
+.button{
+    -fx-font-size: 23px;
+    -fx-pref-width:250px;
+    -fx-pref-height:60px;
+    -fx-font-family: "Georgia";
+    -fx-border-radius:4px;
+    -fx-border-color:black;
+    -fx-border-width: 1px;
+}
+.button:hover{
+	-fx-color:#dcddde;
+}
+#header{
+	-fx-font-size:28px;
+	-fx-translate-x:0px;
+	-fx-translate-y:-250px;
+	-fx-font-family: "Georgia";
+}
+#meniuButton{
+	-fx-translate-x:0px;
+	-fx-translate-y:50px;
+}
+
+#exitButton{
+	-fx-translate-x:0px;
+	-fx-translate-y:80px;
+}

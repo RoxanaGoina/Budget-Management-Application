@@ -1,0 +1,97 @@
+.button{
+    -fx-font-size: 20.0px;
+    -fx-pref-width:150.0px;
+    -fx-pref-height:25.0px;
+    -fx-font-family: "Georgia";
+    -fx-border-radius:4.0px;
+    -fx-border-color:black;
+    -fx-border-width: 1.0px;
+    
+}
+#title1{
+	-fx-font-size: 25.0px;
+	 -fx-pref-height:25.0px;
+	 -fx-font-family: "Georgia";
+	 -fx-translate-x:20.0px;
+	-fx-translate-y:-220.0px;
+
+}
+#title2{
+	-fx-font-size: 25.0px;
+	 -fx-pref-height:25.0px;
+	 -fx-font-family: "Georgia";
+	 -fx-translate-x:-100.0px;
+	-fx-translate-y:-70.0px;
+}
+#choiceBox{
+	-fx-font-size: 20.0px;
+	-fx-pref-height:25.0px;
+	-fx-font-family: "Georgia";
+	-fx-translate-x:-60.0px;
+	-fx-translate-y:-140.0px;
+	-fx-pref-width:210.0px;
+	
+}
+#choiceBoxText{
+	-fx-font-size: 22.0px;
+	-fx-pref-height:25.0px;
+	-fx-font-family: "Georgia";
+	-fx-translate-x:-750.0px;
+	-fx-translate-y:-140.0px;
+}
+
+#textArea{
+	-fx-pref-height:50.0px;
+	-fx-translate-x:30.0px;
+	-fx-translate-y:150.0px;
+	-fx-font-size:90.0px;
+	-fx-font-family: "Georgia";
+}
+#price{
+	-fx-font-size: 21.0px;
+	 -fx-pref-height:25.0px;
+	 -fx-font-family: "Georgia";
+	 -fx-translate-x:-80.0px;
+	-fx-translate-y:-70.0px;
+	
+}
+
+#priceText{
+	-fx-translate-x:-425px;
+	-fx-translate-y:10px;
+	 -fx-pref-height:20px;
+	-fx-font-size: 21.0px;
+	 -fx-font-family: "Georgia";
+}
+
+#textField{
+	-fx-translate-x:-135px;
+	-fx-translate-y:-130px;
+	-fx-pref-height:30px;
+}
+#data{
+	-fx-translate-x:-350px;
+	-fx-translate-y:-80px;
+	 -fx-pref-height:20px;
+	-fx-font-size: 21.0px;
+	 -fx-font-family: "Georgia";
+}
+	
+#dp{
+	-fx-translate-x:-325px;
+	-fx-translate-y:-80px;
+	-fx-pref-height:30px;
+}
+
+#backButton{
+	 -fx-translate-x:-590.0px;
+	-fx-translate-y:40.0px;
+	
+}
+#finalize{
+	 -fx-translate-x:490.0px;
+	-fx-translate-y:40.0px;
+	-fx-pref-height:27.0px;
+}
+
+
