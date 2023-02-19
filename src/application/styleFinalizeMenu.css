@@ -86,12 +86,14 @@
 #backButton{
 	 -fx-translate-x:-590.0px;
 	-fx-translate-y:40.0px;
+	-fx-color:#8A2BE2;
 	
 }
 #finalize{
 	 -fx-translate-x:490.0px;
 	-fx-translate-y:40.0px;
 	-fx-pref-height:27.0px;
+	-fx-color:#8A2BE2
 }
 
 

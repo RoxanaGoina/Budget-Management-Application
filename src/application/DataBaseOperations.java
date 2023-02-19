@@ -455,4 +455,82 @@ public class DataBaseOperations {
 		return false;
 
 	}
+
+
+
+public static HashMap<String, Double> extractDataFromFinalListSecondMonth() {
+	FinalList finalList = new FinalList();
+	HashMap<String, Double> map = new HashMap<>();
+	Connection conn;
+	try {
+		conn = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test", dbUser, dbPass);
+		String querry = "Select  date,price from Final_List  where  MONTH(CURDATE())-1=extract(month from date)";
+		Statement pst = conn.createStatement();
+		ResultSet rs = pst.executeQuery(querry);
+		Date data;
+		double price = 0;
+		while (rs.next()) {
+			data = rs.getDate("Date");
+			DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			String strDate = sdf.format(data);
+			// System.out.println(strDate);
+			// LocalDate date =
+			// data.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			// LocalDate d=Date.valueOf(data);
+			// LocalDate.of(data.getYear(), data.getMonth()+1, data.getDate());
+			price = rs.getDouble("price");
+			if(map.containsKey(strDate)) {
+				 double price1=map.get(strDate);
+				 price=price+price1;
+				 map.put(strDate,Double .valueOf(price));
+			}
+			else
+			map.put(strDate, Double.valueOf(price));
+		}
+		// System.out.println(map.toString());
+		return map;
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return map;
+
+}
+public static HashMap<String, Double> extractDataFromFinalListThirdMonth() {
+	FinalList finalList = new FinalList();
+	HashMap<String, Double> map = new HashMap<>();
+	Connection conn;
+	try {
+		conn = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test", dbUser, dbPass);
+		String querry = "Select  date,price from Final_List  where  extract(month from date)=12";
+		Statement pst = conn.createStatement();
+		ResultSet rs = pst.executeQuery(querry);
+		Date data;
+		double price = 0;
+		while (rs.next()) {
+			data = rs.getDate("Date");
+			DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			String strDate = sdf.format(data);
+			// System.out.println(strDate);
+			// LocalDate date =
+			// data.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			// LocalDate d=Date.valueOf(data);
+			// LocalDate.of(data.getYear(), data.getMonth()+1, data.getDate());
+			price = rs.getDouble("price");
+			if(map.containsKey(strDate)) {
+				 double price1=map.get(strDate);
+				 price=price+price1;
+				 map.put(strDate,Double .valueOf(price));
+			}
+			else
+			map.put(strDate, Double.valueOf(price));
+		}
+		// System.out.println(map.toString());
+		return map;
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return map;
+}
 }

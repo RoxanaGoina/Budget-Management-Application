@@ -2,11 +2,16 @@ package application;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 //import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -26,6 +31,9 @@ public class MainMenu {
 	public Scene showMenu(Stage primaryStage, double windowWidth, double windowHeight) {
 		VBox root=new VBox();
 		Scene a=new Scene(root,windowWidth,windowHeight);
+		 BackgroundFill background_fill = new BackgroundFill(Color.MEDIUMTURQUOISE, null, null);
+		 Background background = new Background(background_fill);
+		 root.setBackground(background);
 		MainMenu.noConnectionLabel.setId("noConnectionLabel");
 		DataBaseOperations.checkConnection();
 		MainMenu.noConnectionLabelSetProp();
@@ -41,14 +49,17 @@ public class MainMenu {
 					MainMenu.noConnectionLabel.setText("");
 		    }
 		});
+		a.setFill(Color.AQUA);
 		meniuButton.setId("meniuButton");
 		exitButton.setId("exitButton");
 		header.setId("header");
 		meniuButton.setFocusTraversable(false);
 		exitButton.setFocusTraversable(false);
+		header.setTextFill(Color.SNOW);
+		header.setFont(Font.font(50));
 		a.getStylesheets().add(getClass().getResource("styleMainMenu.css").toExternalForm());
 		root.setAlignment(Pos.CENTER);
-		
+		a.setFill(Color.BLACK);
 		meniuButton.setOnMouseClicked(e->{
 			primaryStage.setScene((new MainMenuInterface()).showMainMenu(primaryStage, windowWidth, windowHeight));
 		});
@@ -58,6 +69,8 @@ public class MainMenu {
 				primaryStage.close();
 		});
 
+		//a.setFill(Color.BLUE);
+		//a.setFill(null);
 		
 		return a;
 		

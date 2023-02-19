@@ -2,6 +2,8 @@ package application;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -60,7 +62,9 @@ public Scene create(Stage primaryStage, double windowWidth, double windowHeight)
 	choiceBox.setFocusTraversable(false);
 	text.setTextFill(Color.color(1, 0, 0));
 	
-	
+	BackgroundFill background_fill = new BackgroundFill(Color.LIGHTSEAGREEN, null, null);
+	 Background background = new Background(background_fill);
+	 root.setBackground(background);
 	try {
 	FileInputStream input = new FileInputStream("./delete.png");
 	Image image = new Image(input);

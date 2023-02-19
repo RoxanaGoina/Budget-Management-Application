@@ -2,10 +2,13 @@ package application;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -123,6 +126,14 @@ public class CreateListMenu {
 					MainMenu.noConnectionLabel.setText("");
 			}
 		});
+		BackgroundFill background_fill = new BackgroundFill(Color.DEEPSKYBLUE, null, null);
+		 Background background = new Background(background_fill);
+		 
+		 
+		 BackgroundFill fill=new BackgroundFill(Color.DARKVIOLET,null,null);
+		 Background bground=new Background(fill);
+		 
+		 root.setBackground(background);
 		textArea.setId("textArea");
 		textArea.setFocusTraversable(false);
 		header.setId("header");
@@ -138,6 +149,11 @@ public class CreateListMenu {
 		select.setFocusTraversable(false);
 		selectText.setId("selectText");
 		createList.setId("createList");
+		header.setTextFill(Color.DEEPPINK);
+		name.setTextFill(Color.DARKVIOLET);
+		select.setTextFill(Color.DARKVIOLET);
+		textArea.setBackground(bground);
+		addButton.setTextFill(Color.SNOW);
 		createList.setFocusTraversable(false);
 		selectField.setFocusTraversable(false);
 		selectText.setFocusTraversable(false);
@@ -160,7 +176,8 @@ public class CreateListMenu {
 		// textArea.setWrapText(true);
 		textArea.setTranslateX(250);
 		textArea.setTranslateY(-100);
-
+		addButton.setBackground(background);
+		addButton.setBackground(bground);
 		List<Item> ItemList = DataBaseOperations.listItem();
 		List<Item> lista = new ArrayList<>();
 		for (Item i : ItemList) {

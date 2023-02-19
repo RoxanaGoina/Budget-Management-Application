@@ -19,6 +19,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseButton;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -100,7 +102,7 @@ public void css() {
 	textArea.setPrefColumnCount(250);
 	textArea.setTranslateX(150);
 	textArea.setTranslateY(-90);
-	header.setTextFill(Color.color(0.50, 0.047,0.66));
+	header.setTextFill(Color.LEMONCHIFFON);
 	title.setTextFill(Color.color(0.013, 0.64, 0.624));
 	textArea.setEditable(false);
 	searchByPattern.setId("searchByPattern");
@@ -125,10 +127,21 @@ public Scene export(Stage primaryStage, double windowWidth, double windowHeight)
 		if (e.getButton() == MouseButton.PRIMARY) {
 			primaryStage.setScene((new MainMenuInterface()).showMainMenu(primaryStage, windowWidth, windowHeight));
 	}});
+	BackgroundFill background_fill = new BackgroundFill(Color.MEDIUMORCHID, null, null);
+	 Background background = new Background(background_fill);
+	 BackgroundFill backgroundFillPDF = new BackgroundFill(Color.LIGHTSEAGREEN, null, null);
+	 Background backgroundPDF = new Background(backgroundFillPDF);
+	 
+	 root.setBackground(background);
 	csvButton.setTranslateX(430);
 	csvButton.setTranslateY(195);
+	pdfButton.setBackground(backgroundPDF);
+	csvButton.setBackground(backgroundPDF);
+	backButton.setBackground(backgroundPDF);
 	patternImput.setTranslateX(-270);
 	patternImput.setPrefHeight(50);
+	searchByPattern.setBackground(backgroundPDF);
+	//patternImput.setBackground(backgroundPDF);
 	//searchByPattern.setPrefHeight(20);
 	patternImput.setFont(Font.font("Verdana", 11.7));
 	Map<String, List<Item>> map=DataBaseOperations.getAllListsForExport();

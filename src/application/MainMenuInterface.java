@@ -2,7 +2,10 @@ package application;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 //import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -30,7 +33,7 @@ private Button vizualizerGraphic=new Button("Vizualizare grafic de achiziții ")
 //private Button modifyGraphic=new Button("Modificare grafic de achiziții");
 private Label header=new Label("Meniu principal");
 private Button exportButton=new Button("Exportare liste");
-private Button exitButton=new Button("Închide aplicatia");
+private Button exitButton=new Button("Vizualizare statistici");
 
 /**
  * 
@@ -60,7 +63,7 @@ public Scene showMainMenu(Stage primaryStage, double windowWidth, double windowH
 	    }
 	});
 	
-		addItem.setId("addItem");
+	addItem.setId("addItem");
 	createList.setId("createList");
 	header.setId("header");
 	vizual.setId("vizual");
@@ -80,6 +83,10 @@ public Scene showMainMenu(Stage primaryStage, double windowWidth, double windowH
 	//modifyGraphic.setFocusTraversable(false);
 	exitButton.setFocusTraversable(false);
 	exportButton.setFocusTraversable(false);
+	header.setTextFill(Color.SEASHELL);
+	 BackgroundFill background_fill = new BackgroundFill(Color.MEDIUMTURQUOISE, null, null);
+	 Background background = new Background(background_fill);
+	 root.setBackground(background);
 	a.getStylesheets().add(getClass().getResource("styleMainMenuInterface.css").toExternalForm());
 	root.setAlignment(Pos.CENTER);
 	root.setSpacing(15);
@@ -101,7 +108,7 @@ public Scene showMainMenu(Stage primaryStage, double windowWidth, double windowH
 	
 	exitButton.setOnMouseClicked(e -> {
 		if(e.getButton() == MouseButton.PRIMARY)
-			primaryStage.close();
+			primaryStage.setScene((new GraphDifferenceMenu()).show(primaryStage, windowWidth, windowHeight));
 	});
 	vizual.setOnMouseClicked(e->{
 		if(e.getButton()==MouseButton.PRIMARY)

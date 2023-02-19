@@ -22,6 +22,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseButton;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -102,8 +104,8 @@ public class FinalizeMenu {
 		textArea.setPrefWidth(330);
 		textArea.setTranslateX(100);
 		textArea.setTranslateY(-60);
-		title1.setTextFill(Color.color(0.627, 0.125,0.941));
-		title2.setTextFill(Color.color(0.275, 0.761,0.796));
+		title1.setTextFill(Color.DARKVIOLET);
+		title2.setTextFill(Color.DEEPPINK);
 		price.setTranslateX(-165);
 		price.setTranslateY(-130);
 		price.setFont(Font.font(21));
@@ -111,7 +113,9 @@ public class FinalizeMenu {
 		textAreaText.setFocusTraversable(false);
 		textArea.setFont(Font.font(19));
 		
-		
+		BackgroundFill background_fill = new BackgroundFill(Color.CORNFLOWERBLUE, null, null);
+		 Background background = new Background(background_fill);
+		 root.setBackground(background);
 		a.getStylesheets().add(getClass().getResource("styleFinalizeMenu.css").toExternalForm());
 		root.getChildren().addAll(title1,title2,choiceBox,textArea,choiceBoxText,finalize,price,textField,priceText,data,dp,backButton);
 		root.setAlignment(Pos.CENTER);

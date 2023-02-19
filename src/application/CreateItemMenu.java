@@ -2,9 +2,12 @@ package application;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -118,14 +121,18 @@ public class CreateItemMenu {
 		createButton.setFocusTraversable(false);
 		createButton.setTranslateY(160);
 		createButton.setTranslateX(120);
-
+		label1.setTextFill(Color.DARKMAGENTA);
 		// root.setAlignment(Pos.CENTER);
+		
+		label1.setFont(Font.font(25));
 		field.setTranslateX(0);
 		field.setTranslateY(0);
 		t1.setFont(Font.font(15));
 		label3.setFont(Font.font(15));
 		textField.setFont(Font.font(15.2));
-
+		 BackgroundFill background_fill = new BackgroundFill(Color.MEDIUMPURPLE, null, null);
+		 Background background = new Background(background_fill);
+		 root.setBackground(background);
 		l4.setId("l4");
 		l4.setFocusTraversable(false);
 		choicebox.setValue("Alege categoria");
@@ -165,7 +172,7 @@ public class CreateItemMenu {
 			ImageView imageView = new ImageView(image);
 			imageView.setFitHeight(222);
 			imageView.setFitWidth(250);
-			imageView.setStyle("-fx-translate-x:610px; -fx-translate-y:-170px");
+			imageView.setStyle("-fx-translate-x:640px; -fx-translate-y:-180px");
 
 			root.getChildren().add(imageView);
 		} catch (FileNotFoundException e1) {

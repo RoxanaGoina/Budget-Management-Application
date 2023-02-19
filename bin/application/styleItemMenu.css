@@ -12,12 +12,13 @@
 }
 #createButton{
 	 -fx-pref-width:555px;
+	 -fx-color:E90064;
 }
 #label1{
 	-fx-pref-width:570px;
 	-fx-pref-height:17px;
 	-fx-font-size:22px;
-	-fx-translate-x:-220px;
+	-fx-translate-x:-240px;
 	-fx-translate-y:-260px;
 	-fx-font-family: "Georgia";
 }
@@ -64,4 +65,5 @@
 }
 #backButton{
 	-fx-pref-width:543px;
+	-fx-color:#20B2AA;
 }

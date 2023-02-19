@@ -1,25 +1,26 @@
 .button{
     -fx-font-size: 23px;
-    -fx-pref-width:360px;
+    -fx-pref-width:350px;
     -fx-pref-height:28px;
     -fx-font-family:"Georgia";
     -fx-border-radius:4px;
     -fx-border-color:black;
     -fx-border-width: 1px;
+    -fx-color:BA55D3;
 }
 .button:hover{
-	-fx-color:#dcddde;
+	-fx-color:#000000;
 }
 #header{
-	-fx-font-size:30px;
+	-fx-font-size:40px;
 	-fx-translate-x:0px;
-	-fx-translate-y:-430px;
+	-fx-translate-y:-440px;
 	-fx-font-family: "Georgia";
+	 
 }
 .addItem{
 	-fx-translate-x:0px;
-	-fx-translate-y:-350px;
-
+	-fx-translate-y:-300px;
 }
 
 .createList{
@@ -56,7 +57,7 @@
 
 .exitButton{
 	-fx-translate-x:0px;
-	-fx-translate-y:200px;
+	-fx-translate-y:350px;
 	
 }
 

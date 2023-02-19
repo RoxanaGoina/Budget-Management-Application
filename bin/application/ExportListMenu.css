@@ -8,6 +8,10 @@
     -fx-border-width: 1.0px;
     
 }
+
+.button:hover{
+	-fx-color:#000000;
+}
 #choiceBox{
 	-fx-font-size: 20.0px;
 	-fx-pref-height:23.0px;
@@ -23,6 +27,7 @@
 	-fx-font-family: "Georgia";
 	-fx-translate-x:-15.0px;
 	-fx-translate-y:-200.0px;
+	
 }
 #title{
 	-fx-font-size: 24.0px;

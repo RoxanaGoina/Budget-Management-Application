@@ -33,6 +33,7 @@
 	-fx-translate-x:75px;
 	-fx-translate-y:160px;
 	-fx-font-family: "Georgia";	
+	-fx-color:#9400D3;
 }
 #deleteItem{
 	-fx-pref-height:25px;
@@ -41,6 +42,7 @@
 	-fx-translate-x:525px;
 	-fx-translate-y:240px;
 	-fx-font-family: "Georgia";	
+	-fx-color:#9400D3;
 }
 
 #text{

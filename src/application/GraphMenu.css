@@ -11,23 +11,42 @@
 	-fx-color:#dcddde;
 }
 #lineChart{
+	-fx-translate-x:-60px;
+	-fx-translate-y:-10px;
 	
 }
 #backButton{
-	-fx-translate-x:-530px;
-	-fx-translate-y:190px;
+	-fx-translate-x:-490px;
+	-fx-translate-y:220px;
+	-fx-color:E90064;
 }
 #total{
 	-fx-pref-height:10px;
-	-fx-font-size:25px;
+	-fx-font-size:30px;
 	-fx-font-family: "Georgia";
-	-fx-translate-x:-130px;
-	-fx-translate-y:190px;
+	-fx-translate-x:-120px;
+	-fx-translate-y:-120px;
 }
 #sum{
 	-fx-pref-height:10px;
-	-fx-font-size:25px;
+	-fx-font-size:23px;
 	-fx-font-family: "Georgia";
 	-fx-translate-x:-110px;
-	-fx-translate-y:190px;
+	-fx-translate-y:-120px;
+}
+#choiceBox{
+	 -fx-pref-width:180px;
+	-fx-translate-x:350px;
+	-fx-translate-y:-390px;
+	-fx-pref-height:5px;
+	-fx-font-size:20px;
+	-fx-font-family: "Georgia";
+	
+}
+#money{
+	-fx-pref-height:10px;
+	-fx-font-size:25px;
+	-fx-font-family: "Georgia";
+	-fx-translate-x:20px;
+	-fx-translate-y:-385px;
 }
