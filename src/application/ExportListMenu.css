@@ -9,9 +9,7 @@
     
 }
 
-.button:hover{
-	-fx-color:#000000;
-}
+
 #choiceBox{
 	-fx-font-size: 20.0px;
 	-fx-pref-height:23.0px;

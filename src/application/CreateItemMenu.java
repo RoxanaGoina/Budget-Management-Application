@@ -167,7 +167,7 @@ public class CreateItemMenu {
 		 * e1.printStackTrace(); }
 		 */
 		try {
-			FileInputStream input = new FileInputStream("./shopping.jpg");
+			FileInputStream input = new FileInputStream("./shopping-removebg-preview.png");
 			Image image = new Image(input);
 			ImageView imageView = new ImageView(image);
 			imageView.setFitHeight(222);

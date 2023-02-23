@@ -1,6 +1,7 @@
 package application;
 
 import java.rmi.registry.LocateRegistry;
+
 import java.sql.Date;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
@@ -10,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.itextpdf.text.Font;
 import java.util.Currency;
@@ -46,6 +48,8 @@ private Label sum=new Label();
 private static final DecimalFormat df = new DecimalFormat("0.00");
 private Label money=new Label("Moneda");
 
+private static boolean firstOpen = false;
+HashMap<String, Double> exchangeRates=new HashMap<>();
 
 public String convertToLocalDate(String date) {
 	String[] split=date.split("-");
@@ -72,6 +76,11 @@ public void css() {
  * @return Metoda returneaza fereastra creata.
  */
 public Scene show(Stage primaryStage, double windowWidth, double windowHeight) {
+	if(firstOpen == false) {
+	ExchangeRatesHelper.getExchangeRates();
+		 exchangeRates = ExchangeRatesHelper.values;
+		firstOpen = true;
+	}
 	FlowPane root=new FlowPane();
 	Scene a = new Scene(root, windowWidth, windowHeight);
 	xAxis.setLabel("Data");
@@ -108,6 +117,8 @@ public Scene show(Stage primaryStage, double windowWidth, double windowHeight) {
 	choiceBox.getItems().add("Yen japonez");
 	choiceBox.getItems().add("Forinț");
 	choiceBox.setFocusTraversable(false);
+ for(Entry<String, Double> i : exchangeRates.entrySet())
+	System.out.println(i);
 	choiceBox.setOnAction(e->{
 		String choice=choiceBox.getValue();
 		if(choice=="Euro")
